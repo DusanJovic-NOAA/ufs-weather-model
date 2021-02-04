@@ -41,3 +41,6 @@ export MAKE_NH=.T.
 # *DH
 export MOUNTAIN=.T.
 export NA_INIT=0
+
+export MODEL_CONFIGURE=model_configure_regional.IN
+export QUILTING=.false.

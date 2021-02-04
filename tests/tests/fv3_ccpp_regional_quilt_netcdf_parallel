@@ -33,3 +33,8 @@ export INPES=6
 export JNPES=4
 
 export WLCLK=30
+
+export MODEL_CONFIGURE=model_configure_regional.IN
+export QUILTING=.true.
+export OUTPUT_FILE="'netcdf_parallel' 'netcdf_parallel'"
+export IDEFLATE=1

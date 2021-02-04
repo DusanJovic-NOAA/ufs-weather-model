@@ -32,3 +32,7 @@ export FDIAG=3
 export INPES=4
 export JNPES=6
 export WRITE_RESTART_WITH_BCS=.true.
+export RESTART_INTERVAL=6
+
+export MODEL_CONFIGURE=model_configure_regional.IN
+export QUILTING=.false.

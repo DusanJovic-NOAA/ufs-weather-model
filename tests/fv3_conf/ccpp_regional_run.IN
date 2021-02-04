@@ -1,5 +1,4 @@
 rsync -arv @[INPUTDATA_ROOT]/FV3_regional_input_data/. .
-rsync -arv @[INPUTDATA_ROOT]/@[INPUT_DIR]/model_configure .
 
 rm -rf INPUT RESTART
 mkdir  INPUT RESTART
