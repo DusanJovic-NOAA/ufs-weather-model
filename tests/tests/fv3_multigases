@@ -6,7 +6,7 @@
 
 export TEST_DESCR="Compare CCPP FV3 multi-gases results with previous trunk version"
 
-export CNTL_DIR=fv3_multigases
+export CNTL_DIR=fv3_multigases_repro
 
 export LIST_FILES="atmos_4xdaily.tile1.nc \
                    atmos_4xdaily.tile2.nc \
@@ -77,7 +77,6 @@ export LIST_FILES="atmos_4xdaily.tile1.nc \
                    RESTART/phy_data.tile5.nc \
                    RESTART/phy_data.tile6.nc"
 
-                                                    
 export_fv3
 export NPZ=149
 export NPZP=150

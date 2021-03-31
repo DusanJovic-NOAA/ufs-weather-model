@@ -76,13 +76,13 @@ if [ $WARM_START = .F. ]; then
 else
   # NOTE: bmark-wave model is not currently tested for restart
   # Restart files
-  cp -r ../${DEP_RUN}${RT_SUFFIX}/RESTART/${RESTART_FILE_PREFIX}.* ./INPUT
+  cp -r ../${DEP_RUN}/RESTART/${RESTART_FILE_PREFIX}.* ./INPUT
   rm -f INPUT/fv_core.res.*
   rm -f INPUT/fv_srf_wnd.res.*
   rm -f INPUT/fv_tracer.res.*
   rm -f INPUT/phy_data.*
   rm -f INPUT/sfc_data.*
-  for RFILE in ../${DEP_RUN}${RT_SUFFIX}/RESTART/${RESTART_FILE_PREFIX}.*; do
+  for RFILE in ../${DEP_RUN}/RESTART/${RESTART_FILE_PREFIX}.*; do
     [ -e $RFILE ] || exit 1
     RFILE_OLD=$(basename $RFILE)
     RFILE_NEW="${RFILE_OLD//${RESTART_FILE_PREFIX}./}"
@@ -90,18 +90,18 @@ else
   done
   
   # Restart files MOM6 mx025
-  cp ../${DEP_RUN}${RT_SUFFIX}/RESTART/MOM.res.${RESTART_FILE_SUFFIX_HRS}-00-00.nc ./INPUT/MOM.res.nc
-  cp ../${DEP_RUN}${RT_SUFFIX}/RESTART/MOM.res.${RESTART_FILE_SUFFIX_HRS}-00-00_1.nc ./INPUT/MOM.res_1.nc
-  cp ../${DEP_RUN}${RT_SUFFIX}/RESTART/MOM.res.${RESTART_FILE_SUFFIX_HRS}-00-00_2.nc ./INPUT/MOM.res_2.nc
-  cp ../${DEP_RUN}${RT_SUFFIX}/RESTART/MOM.res.${RESTART_FILE_SUFFIX_HRS}-00-00_3.nc ./INPUT/MOM.res_3.nc
+  cp ../${DEP_RUN}/RESTART/MOM.res.${RESTART_FILE_SUFFIX_HRS}-00-00.nc ./INPUT/MOM.res.nc
+  cp ../${DEP_RUN}/RESTART/MOM.res.${RESTART_FILE_SUFFIX_HRS}-00-00_1.nc ./INPUT/MOM.res_1.nc
+  cp ../${DEP_RUN}/RESTART/MOM.res.${RESTART_FILE_SUFFIX_HRS}-00-00_2.nc ./INPUT/MOM.res_2.nc
+  cp ../${DEP_RUN}/RESTART/MOM.res.${RESTART_FILE_SUFFIX_HRS}-00-00_3.nc ./INPUT/MOM.res_3.nc
 
   # CMEPS restart and pointer files
   RFILE="ufs.cpld.cpl.r.${RESTART_FILE_SUFFIX_SECS}.nc"
-  cp  ../${DEP_RUN}${RT_SUFFIX}/RESTART/${RFILE} .
+  cp  ../${DEP_RUN}/RESTART/${RFILE} .
   ls -1 ${RFILE}>rpointer.cpl
 
   # CICE restart and pointer files
   RFILE="iced.${RESTART_FILE_SUFFIX_SECS}.nc"
-  cp  ../${DEP_RUN}${RT_SUFFIX}/RESTART/${RFILE} ./INPUT
+  cp  ../${DEP_RUN}/RESTART/${RFILE} ./INPUT
   ls -1 "./INPUT/"${RFILE}>ice.restart_file
 fi

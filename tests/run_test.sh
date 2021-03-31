@@ -44,9 +44,7 @@ source tests/$TEST_NAME
 # Save original CNTL_DIR name as INPUT_DIR for regression
 # tests that try to copy input data from CNTL_DIR
 export INPUT_DIR=${CNTL_DIR}
-# Append RT_SUFFIX to RUNDIR, and BL_SUFFIX to CNTL_DIR
-export RUNDIR=${RUNDIR_ROOT}/${TEST_NAME}${RT_SUFFIX}
-export CNTL_DIR=${CNTL_DIR}${BL_SUFFIX}
+export RUNDIR=${RUNDIR_ROOT}/${TEST_NAME}
 
 export JBNME=$(basename $RUNDIR_ROOT)_${TEST_NR}
 
@@ -54,9 +52,9 @@ echo -n "${TEST_NAME}, $( date +%s )," > ${LOG_DIR}/job_${JOB_NR}_timestamp.txt
 
 UNIT_TEST=${UNIT_TEST:-false}
 if [[ ${UNIT_TEST} == false ]]; then
-  REGRESSIONTEST_LOG=${LOG_DIR}/rt_${TEST_NR}_${TEST_NAME}${RT_SUFFIX}.log
+  REGRESSIONTEST_LOG=${LOG_DIR}/rt_${TEST_NR}_${TEST_NAME}.log
 else
-  REGRESSIONTEST_LOG=${LOG_DIR}/ut_${TEST_NR}_${TEST_NAME}${RT_SUFFIX}.log
+  REGRESSIONTEST_LOG=${LOG_DIR}/ut_${TEST_NR}_${TEST_NAME}.log
 fi
 export REGRESSIONTEST_LOG
 

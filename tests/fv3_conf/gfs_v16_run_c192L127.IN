@@ -2,7 +2,7 @@ rm -fr INPUT RESTART
 rsync -arv @[INPUTDATA_ROOT]/FV3_input_data_c192L127/INPUT/ INPUT/
 mkdir RESTART
 if [ $WARM_START = .T. ]; then
-  rsync -arv ../fv3_gfs_v16_c192L127${RT_SUFFIX}/RESTART/ INPUT/
+  rsync -arv ../fv3_gfs_v16_c192L127/RESTART/ INPUT/
   cd INPUT
   rename 20190120.000000. '' 20190120.000000.*
   cd ..

@@ -630,16 +630,6 @@ EOF
       ./compile.sh $MACHINE_ID "${MAKE_OPT}" $COMPILE_NR > ${LOG_DIR}/compile_${COMPILE_NR}.log 2>&1
     fi
 
-    # Set RT_SUFFIX (regression test run directories and log files) and BL_SUFFIX
-    # (regression test baseline directories) for REPRO or PROD runs
-    if [[ ${MAKE_OPT^^} =~ "REPRO=Y" ]]; then
-      RT_SUFFIX="_repro"
-      BL_SUFFIX="_repro"
-    else
-      RT_SUFFIX=""
-      BL_SUFFIX=""
-    fi
-
     if [[ ${MAKE_OPT^^} =~ "WW3=Y" ]]; then
        COMPILE_PREV_WW3_NR=${COMPILE_NR}
     fi
@@ -678,10 +668,6 @@ EOF
       fi
     fi
 
-    # Avoid uninitialized RT_SUFFIX/BL_SUFFIX (see definition above)
-    RT_SUFFIX=${RT_SUFFIX:-""}
-    BL_SUFFIX=${BL_SUFFIX:-""}
-
     if [[ $ROCOTO == true && $new_compile == true ]]; then
       new_compile=false
       in_metatask=true
@@ -712,8 +698,6 @@ EOF
       export PATHTR=${PATHTR}
       export NEW_BASELINE=${NEW_BASELINE}
       export CREATE_BASELINE=${CREATE_BASELINE}
-      export RT_SUFFIX=${RT_SUFFIX}
-      export BL_SUFFIX=${BL_SUFFIX}
       export SCHEDULER=${SCHEDULER}
       export ACCNR=${ACCNR}
       export QUEUE=${QUEUE}
@@ -730,7 +714,7 @@ EOF
       elif [[ $ECFLOW == true ]]; then
         ecflow_create_run_task
       else
-        ./run_test.sh ${PATHRT} ${RUNDIR_ROOT} ${TEST_NAME} ${TEST_NR} ${COMPILE_NR} > ${LOG_DIR}/run_${TEST_NAME}${RT_SUFFIX}.log 2>&1
+        ./run_test.sh ${PATHRT} ${RUNDIR_ROOT} ${TEST_NAME} ${TEST_NR} ${COMPILE_NR} > ${LOG_DIR}/run_${TEST_NAME}.log 2>&1
       fi
     )
 

@@ -420,7 +420,7 @@ EOF
 rocoto_create_run_task() {
 
   if [[ $DEP_RUN != '' ]]; then
-    DEP_STRING="<and> <taskdep task=\"compile_${COMPILE_NR}\"/> <taskdep task=\"${DEP_RUN}${RT_SUFFIX}\"/> </and>"
+    DEP_STRING="<and> <taskdep task=\"compile_${COMPILE_NR}\"/> <taskdep task=\"${DEP_RUN}\"/> </and>"
   else
     DEP_STRING="<taskdep task=\"compile_${COMPILE_NR}\"/>"
   fi
@@ -439,17 +439,17 @@ rocoto_create_run_task() {
   fi
 
   cat << EOF >> $ROCOTO_XML
-    <task name="${TEST_NAME}${RT_SUFFIX}" maxtries="1">
+    <task name="${TEST_NAME}" maxtries="1">
       <dependency> $DEP_STRING </dependency>
       <command>&PATHRT;/run_test.sh &PATHRT; &RUNDIR_ROOT; ${TEST_NAME} ${TEST_NR} ${COMPILE_NR} </command>
-      <jobname>${TEST_NAME}${RT_SUFFIX}</jobname>
+      <jobname>${TEST_NAME}</jobname>
       <account>${ACCNR}</account>
       <queue>${QUEUE}</queue>
       <partition>${PARTITION}</partition>
       <nodes>${NODES}:ppn=${TPN}</nodes>
       <walltime>00:${WLCLK}:00</walltime>
-      <stdout>&RUNDIR_ROOT;/${TEST_NAME}${RT_SUFFIX}/out</stdout>
-      <stderr>&RUNDIR_ROOT;/${TEST_NAME}${RT_SUFFIX}/err</stderr>
+      <stdout>&RUNDIR_ROOT;/${TEST_NAME}/out</stdout>
+      <stderr>&RUNDIR_ROOT;/${TEST_NAME}/err</stderr>
       ${NATIVE}
     </task>
 EOF
@@ -505,19 +505,19 @@ EOF
 
 ecflow_create_run_task() {
 
-  cat << EOF > ${ECFLOW_RUN}/${ECFLOW_SUITE}/${TEST_NAME}${RT_SUFFIX}.ecf
+  cat << EOF > ${ECFLOW_RUN}/${ECFLOW_SUITE}/${TEST_NAME}.ecf
 %include <head.h>
-$PATHRT/run_test.sh ${PATHRT} ${RUNDIR_ROOT} ${TEST_NAME} ${TEST_NR} ${COMPILE_NR} > ${LOG_DIR}/run_${TEST_NR}_${TEST_NAME}${RT_SUFFIX}.log 2>&1 &
+$PATHRT/run_test.sh ${PATHRT} ${RUNDIR_ROOT} ${TEST_NAME} ${TEST_NR} ${COMPILE_NR} > ${LOG_DIR}/run_${TEST_NR}_${TEST_NAME}.log 2>&1 &
 %include <tail.h>
 EOF
 
-  echo "    task ${TEST_NAME}${RT_SUFFIX}" >> ${ECFLOW_RUN}/${ECFLOW_SUITE}.def
+  echo "    task ${TEST_NAME}" >> ${ECFLOW_RUN}/${ECFLOW_SUITE}.def
   echo "      label job_id ''" >> ${ECFLOW_RUN}/${ECFLOW_SUITE}.def
   echo "      label job_status ''" >> ${ECFLOW_RUN}/${ECFLOW_SUITE}.def
   echo "      inlimit max_jobs" >> ${ECFLOW_RUN}/${ECFLOW_SUITE}.def
   if [[ $DEP_RUN != '' ]]; then
     if [[ ${UNIT_TEST} == false ]]; then
-      echo "      trigger compile_${COMPILE_NR} == complete and ${DEP_RUN}${RT_SUFFIX} == complete" >> ${ECFLOW_RUN}/${ECFLOW_SUITE}.def
+      echo "      trigger compile_${COMPILE_NR} == complete and ${DEP_RUN} == complete" >> ${ECFLOW_RUN}/${ECFLOW_SUITE}.def
     else
       echo "      trigger compile_${COMPILE_NR} == complete and ${DEP_RUN} == complete" >> ${ECFLOW_RUN}/${ECFLOW_SUITE}.def
     fi

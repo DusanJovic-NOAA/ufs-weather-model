@@ -715,6 +715,4 @@ export RESTART_EXT='.false.'
 export FRAZIL_FWSALT='.true.'
 # default to write CICE average history files
 export CICE_HIST_AVG='.true.'
-export BL_SUFFIX=""
-export RT_SUFFIX=""
 }
