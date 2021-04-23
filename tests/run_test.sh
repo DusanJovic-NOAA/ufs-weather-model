@@ -42,10 +42,12 @@ source tests/$TEST_NAME
 [[ -e ${RUNDIR_ROOT}/unit_test_${TEST_NR}.env ]] && source ${RUNDIR_ROOT}/unit_test_${TEST_NR}.env
 
 RT_SUFFIX=${RT_SUFFIX:-''}
+BL_SUFFIX=${BL_SUFFIX:-''}
 # Save original CNTL_DIR name as INPUT_DIR for regression
 # tests that try to copy input data from CNTL_DIR
 export INPUT_DIR=${CNTL_DIR}
 export RUNDIR=${RUNDIR_ROOT}/${TEST_NAME}${RT_SUFFIX}
+export CNTL_DIR=${CNTL_DIR}${BL_SUFFIX}
 
 export JBNME=$(basename $RUNDIR_ROOT)_${TEST_NR}
 
