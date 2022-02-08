@@ -60,7 +60,7 @@ export DY_2=5000.0
 
 export OUTPUT_GRID_3='regional_latlon'
 export LON1_3=-95.00
-export LAT1_3=-14.00
+export LAT1_3=14.00
 export LON2_3=-77.00
 export LAT2_3=31.00
 export DLON_3=0.05
