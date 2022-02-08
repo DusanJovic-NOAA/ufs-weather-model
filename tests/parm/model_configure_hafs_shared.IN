@@ -29,7 +29,7 @@ output_grid:             @[OUTPUT_GRID]     # gaussian_grid, global_latlon, regi
 imo:                     @[IMO]             # number of grid points along longitude/latitude direction
 jmo:                     @[JMO]             # needed for gaussian_grid or global_latlon
 cen_lon:                 @[CEN_LON]         # central longitude/latitude (degrees)
-cen_lat:                 @[CEN_LAT]         # needed for regional_latlon, rotated_latlon, lambert_conformal
+cen_lat:                 @[CEN_LAT]         # needed for rotated_latlon, lambert_conformal
 lon1:                    @[LON1]            # longitude/latitude of lower-left corner
 lat1:                    @[LAT1]            # needed for regional_latlon, rotated_latlon, lambert_conformal
 lon2:                    @[LON2]            # longitude/latitude of upper-right corner
@@ -48,7 +48,7 @@ output_grid:             @[OUTPUT_GRID_2]   # gaussian_grid, global_latlon, regi
 imo:                     @[IMO_2]           # number of grid points along longitude/latitude direction
 jmo:                     @[JMO_2]           # needed for gaussian_grid or global_latlon
 cen_lon:                 @[CEN_LON_2]       # central longitude/latitude (degrees)
-cen_lat:                 @[CEN_LAT_2]       # needed for regional_latlon, rotated_latlon, lambert_conformal
+cen_lat:                 @[CEN_LAT_2]       # needed for rotated_latlon, lambert_conformal
 lon1:                    @[LON1_2]          # longitude/latitude of lower-left corner
 lat1:                    @[LAT1_2]          # needed for regional_latlon, rotated_latlon, lambert_conformal
 lon2:                    @[LON2_2]          # longitude/latitude of upper-right corner
@@ -68,7 +68,7 @@ output_grid:             @[OUTPUT_GRID_3]   # gaussian_grid, global_latlon, regi
 imo:                     @[IMO_3]           # number of grid points along longitude/latitude direction
 jmo:                     @[JMO_3]           # needed for gaussian_grid or global_latlon
 cen_lon:                 @[CEN_LON_3]       # central longitude/latitude (degrees)
-cen_lat:                 @[CEN_LAT_3]       # needed for regional_latlon, rotated_latlon, lambert_conformal
+cen_lat:                 @[CEN_LAT_3]       # needed for rotated_latlon, lambert_conformal
 lon1:                    @[LON1_3]          # longitude/latitude of lower-left corner
 lat1:                    @[LAT1_3]          # needed for regional_latlon, rotated_latlon, lambert_conformal
 lon2:                    @[LON2_3]          # longitude/latitude of upper-right corner
@@ -88,7 +88,7 @@ output_grid:             @[OUTPUT_GRID_4]   # gaussian_grid, global_latlon, regi
 imo:                     @[IMO_4]           # number of grid points along longitude/latitude direction
 jmo:                     @[JMO_4]           # needed for gaussian_grid or global_latlon
 cen_lon:                 @[CEN_LON_4]       # central longitude/latitude (degrees)
-cen_lat:                 @[CEN_LAT_4]       # needed for regional_latlon, rotated_latlon, lambert_conformal
+cen_lat:                 @[CEN_LAT_4]       # needed for rotated_latlon, lambert_conformal
 lon1:                    @[LON1_4]          # longitude/latitude of lower-left corner
 lat1:                    @[LAT1_4]          # needed for regional_latlon, rotated_latlon, lambert_conformal
 lon2:                    @[LON2_4]          # longitude/latitude of upper-right corner
@@ -108,7 +108,7 @@ output_grid:             @[OUTPUT_GRID_5]   # gaussian_grid, global_latlon, regi
 imo:                     @[IMO_5]           # number of grid points along longitude/latitude direction
 jmo:                     @[JMO_5]           # needed for gaussian_grid or global_latlon
 cen_lon:                 @[CEN_LON_5]       # central longitude/latitude (degrees)
-cen_lat:                 @[CEN_LAT_5]       # needed for regional_latlon, rotated_latlon, lambert_conformal
+cen_lat:                 @[CEN_LAT_5]       # needed for rotated_latlon, lambert_conformal
 lon1:                    @[LON1_5]          # longitude/latitude of lower-left corner
 lat1:                    @[LAT1_5]          # needed for regional_latlon, rotated_latlon, lambert_conformal
 lon2:                    @[LON2_5]          # longitude/latitude of upper-right corner
@@ -128,7 +128,7 @@ output_grid:             @[OUTPUT_GRID_6]   # gaussian_grid, global_latlon, regi
 imo:                     @[IMO_6]           # number of grid points along longitude/latitude direction
 jmo:                     @[JMO_6]           # needed for gaussian_grid or global_latlon
 cen_lon:                 @[CEN_LON_6]       # central longitude/latitude (degrees)
-cen_lat:                 @[CEN_LAT_6]       # needed for regional_latlon, rotated_latlon, lambert_conformal
+cen_lat:                 @[CEN_LAT_6]       # needed for rotated_latlon, lambert_conformal
 lon1:                    @[LON1_6]          # longitude/latitude of lower-left corner
 lat1:                    @[LAT1_6]          # needed for regional_latlon, rotated_latlon, lambert_conformal
 lon2:                    @[LON2_6]          # longitude/latitude of upper-right corner
