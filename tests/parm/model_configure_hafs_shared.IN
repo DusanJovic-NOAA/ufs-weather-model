@@ -38,10 +38,10 @@ dlon:                    @[DLON]            # grid spacing in longitude/latitude
 dlat:                    @[DLAT]            # needed for regional_latlon, rotated_latlon
 stdlat1:                 @[STDLAT1]         # latitude of first/second standard parallel (degrees)
 stdlat2:                 @[STDLAT2]         # needed for lambert_conformal
-nx:                      @[NX_LC]           # number of grid cells along x/y-axis
-ny:                      @[NY_LC]           # needed for lambert_conformal
-dx:                      @[DX_LC]           # grid cell size in x/y direction (meters)
-dy:                      @[DY_LC]           # needed for lambert_conformal
+nx:                      @[NX]              # number of grid cells along x/y-axis
+ny:                      @[NY]              # needed for lambert_conformal
+dx:                      @[DX]              # grid cell size in x/y direction (meters)
+dy:                      @[DY]              # needed for lambert_conformal
 
 <output_grid_02>
 output_grid:             @[OUTPUT_GRID_2]   # gaussian_grid, global_latlon, regional_latlon, rotated_latlon, lambert_conformal
@@ -57,10 +57,10 @@ dlon:                    @[DLON_2]          # grid spacing in longitude/latitude
 dlat:                    @[DLAT_2]          # needed for regional_latlon, rotated_latlon
 stdlat1:                 @[STDLAT1_2]       # latitude of first/second standard parallel (degrees)
 stdlat2:                 @[STDLAT2_2]       # needed for lambert_conformal
-nx:                      @[NX_LC_2]         # number of grid cells along x/y-axis
-ny:                      @[NY_LC_2]         # needed for lambert_conformal
-dx:                      @[DX_LC_2]         # grid cell size in x/y direction (meters)
-dy:                      @[DY_LC_2]         # needed for lambert_conformal
+nx:                      @[NX_2]            # number of grid cells along x/y-axis
+ny:                      @[NY_2]            # needed for lambert_conformal
+dx:                      @[DX_2]            # grid cell size in x/y direction (meters)
+dy:                      @[DY_2]            # needed for lambert_conformal
 </output_grid_02>
 
 <output_grid_03>
@@ -77,10 +77,10 @@ dlon:                    @[DLON_3]          # grid spacing in longitude/latitude
 dlat:                    @[DLAT_3]          # needed for regional_latlon, rotated_latlon
 stdlat1:                 @[STDLAT1_3]       # latitude of first/second standard parallel (degrees)
 stdlat2:                 @[STDLAT2_3]       # needed for lambert_conformal
-nx:                      @[NX_LC_3]         # number of grid cells along x/y-axis
-ny:                      @[NY_LC_3]         # needed for lambert_conformal
-dx:                      @[DX_LC_3]         # grid cell size in x/y direction (meters)
-dy:                      @[DY_LC_3]         # needed for lambert_conformal
+nx:                      @[NX_3]            # number of grid cells along x/y-axis
+ny:                      @[NY_3]            # needed for lambert_conformal
+dx:                      @[DX_3]            # grid cell size in x/y direction (meters)
+dy:                      @[DY_3]            # needed for lambert_conformal
 </output_grid_03>
 
 <output_grid_04>
@@ -97,10 +97,10 @@ dlon:                    @[DLON_4]          # grid spacing in longitude/latitude
 dlat:                    @[DLAT_4]          # needed for regional_latlon, rotated_latlon
 stdlat1:                 @[STDLAT1_4]       # latitude of first/second standard parallel (degrees)
 stdlat2:                 @[STDLAT2_4]       # needed for lambert_conformal
-nx:                      @[NX_LC_4]         # number of grid cells along x/y-axis
-ny:                      @[NY_LC_4]         # needed for lambert_conformal
-dx:                      @[DX_LC_4]         # grid cell size in x/y direction (meters)
-dy:                      @[DY_LC_4]         # needed for lambert_conformal
+nx:                      @[NX_4]            # number of grid cells along x/y-axis
+ny:                      @[NY_4]            # needed for lambert_conformal
+dx:                      @[DX_4]            # grid cell size in x/y direction (meters)
+dy:                      @[DY_4]            # needed for lambert_conformal
 </output_grid_04>
 
 <output_grid_05>
@@ -117,10 +117,10 @@ dlon:                    @[DLON_5]          # grid spacing in longitude/latitude
 dlat:                    @[DLAT_5]          # needed for regional_latlon, rotated_latlon
 stdlat1:                 @[STDLAT1_5]       # latitude of first/second standard parallel (degrees)
 stdlat2:                 @[STDLAT2_5]       # needed for lambert_conformal
-nx:                      @[NX_LC_5]         # number of grid cells along x/y-axis
-ny:                      @[NY_LC_5]         # needed for lambert_conformal
-dx:                      @[DX_LC_5]         # grid cell size in x/y direction (meters)
-dy:                      @[DY_LC_5]         # needed for lambert_conformal
+nx:                      @[NX_5]            # number of grid cells along x/y-axis
+ny:                      @[NY_5]            # needed for lambert_conformal
+dx:                      @[DX_5]            # grid cell size in x/y direction (meters)
+dy:                      @[DY_5]            # needed for lambert_conformal
 </output_grid_05>
 
 <output_grid_06>
@@ -137,10 +137,10 @@ dlon:                    @[DLON_6]          # grid spacing in longitude/latitude
 dlat:                    @[DLAT_6]          # needed for regional_latlon, rotated_latlon
 stdlat1:                 @[STDLAT1_6]       # latitude of first/second standard parallel (degrees)
 stdlat2:                 @[STDLAT2_6]       # needed for lambert_conformal
-nx:                      @[NX_LC_6]         # number of grid cells along x/y-axis
-ny:                      @[NY_LC_6]         # needed for lambert_conformal
-dx:                      @[DX_LC_6]         # grid cell size in x/y direction (meters)
-dy:                      @[DY_LC_6]         # needed for lambert_conformal
+nx:                      @[NX_6]            # number of grid cells along x/y-axis
+ny:                      @[NY_6]            # needed for lambert_conformal
+dx:                      @[DX_6]            # grid cell size in x/y direction (meters)
+dy:                      @[DY_6]            # needed for lambert_conformal
 </output_grid_06>
 
 nfhout:                  @[NFHOUT]          # Output frequency in hours after forecast hour nfhmax_hf
