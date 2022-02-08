@@ -1442,6 +1442,7 @@ export DLAT=0.03
 
 # input.nml
 export CPL_IMP_MRG=.true.
+
 export DIAG_TABLE=diag_table_hafs
 export FIELD_TABLE=field_table_hafs
 
@@ -1452,4 +1453,132 @@ export RESTART_N=${FHMAX}
 export CPLMODE=hafs
 export RUNTYPE=startup
 export USE_COLDSTART=false
+}
+
+export_hafs ()
+{
+export FV3=true
+export S2S=false
+export HAFS=true
+export DATM_CDEPS=false
+export DOCN_CDEPS=false
+export THRD=1
+export INPES=$INPES_dflt
+export JNPES=$JNPES_dflt
+export TASKS=$TASKS_dflt
+export TPN=$TPN_dflt
+
+export OUTPUT_GRID='regional_latlon'
+export IMO=-999999
+export JMO=-999999
+export CEN_LON=-999.99
+export CEN_LAT=-999.99
+export LON1=-999.99
+export LAT1=-999.99
+export LON2=-999.99
+export LAT2=-999.99
+export DLON=-999.99
+export DLAT=-999.99
+export STDLAT1=-999.99
+export STDLAT2=-999.99
+export NX_LC=-999999
+export NY_LC=-999999
+export DX_LC=-999.99
+export DY_LC=-999.99
+
+export OUTPUT_GRID_2='regional_latlon'
+export IMO_2=-999999
+export JMO_2=-999999
+export CEN_LON_2=-999.99
+export CEN_LAT_2=-999.99
+export LON1_2=-999.99
+export LAT1_2=-999.99
+export LON2_2=-999.99
+export LAT2_2=-999.99
+export DLON_2=-999.99
+export DLAT_2=-999.99
+export STDLAT1_2=-999.99
+export STDLAT2_2=-999.99
+export NX_LC_2=-999999
+export NY_LC_2=-999999
+export DX_LC_2=-999.99
+export DY_LC_2=-999.99
+
+export OUTPUT_GRID_3='regional_latlon'
+export IMO_3=-999999
+export JMO_3=-999999
+export CEN_LON_3=-999.99
+export CEN_LAT_3=-999.99
+export LON1_3=-999.99
+export LAT1_3=-999.99
+export LON2_3=-999.99
+export LAT2_3=-999.99
+export DLON_3=-999.99
+export DLAT_3=-999.99
+export STDLAT1_3=-999.99
+export STDLAT2_3=-999.99
+export NX_LC_3=-999999
+export NY_LC_3=-999999
+export DX_LC_3=-999.99
+export DY_LC_3=-999.99
+
+export OUTPUT_GRID_4='regional_latlon'
+export IMO_4=-999999
+export JMO_4=-999999
+export CEN_LON_4=-999.99
+export CEN_LAT_4=-999.99
+export LON1_4=-999.99
+export LAT1_4=-999.99
+export LON2_4=-999.99
+export LAT2_4=-999.99
+export DLON_4=-999.99
+export DLAT_4=-999.99
+export STDLAT1_4=-999.99
+export STDLAT2_4=-999.99
+export NX_LC_4=-999999
+export NY_LC_4=-999999
+export DX_LC_4=-999.99
+export DY_LC_4=-999.99
+
+export OUTPUT_GRID_5='regional_latlon'
+export IMO_5=-999999
+export JMO_5=-999999
+export CEN_LON_5=-999.99
+export CEN_LAT_5=-999.99
+export LON1_5=-999.99
+export LAT1_5=-999.99
+export LON2_5=-999.99
+export LAT2_5=-999.99
+export DLON_5=-999.99
+export DLAT_5=-999.99
+export STDLAT1_5=-999.99
+export STDLAT2_5=-999.99
+export NX_LC_5=-999999
+export NY_LC_5=-999999
+export DX_LC_5=-999.99
+export DY_LC_5=-999.99
+
+export OUTPUT_GRID_6='regional_latlon'
+export IMO_6=-999999
+export JMO_6=-999999
+export CEN_LON_6=-999.99
+export CEN_LAT_6=-999.99
+export LON1_6=-999.99
+export LAT1_6=-999.99
+export LON2_6=-999.99
+export LAT2_6=-999.99
+export DLON_6=-999.99
+export DLAT_6=-999.99
+export STDLAT1_6=-999.99
+export STDLAT2_6=-999.99
+export NX_LC_6=-999999
+export NY_LC_6=-999999
+export DX_LC_6=-999.99
+export DY_LC_6=-999.99
+
+export NFHOUT=3
+export NFHMAX_HF=-1
+export NFHOUT_HF=3
+export NSOUT=-1
+export OUTPUT_FH=-1
 }
