@@ -62,7 +62,6 @@ ny:                      @[NY_2]
 dx:                      @[DX_2]
 dy:                      @[DY_2]
 </output_grid_02>
-
 <output_grid_03>
 output_grid:             @[OUTPUT_GRID_3]
 imo:                     @[IMO_3]
@@ -82,7 +81,6 @@ ny:                      @[NY_3]
 dx:                      @[DX_3]
 dy:                      @[DY_3]
 </output_grid_03>
-
 <output_grid_04>
 output_grid:             @[OUTPUT_GRID_4]
 imo:                     @[IMO_4]
@@ -102,7 +100,6 @@ ny:                      @[NY_4]
 dx:                      @[DX_4]
 dy:                      @[DY_4]
 </output_grid_04>
-
 <output_grid_05>
 output_grid:             @[OUTPUT_GRID_5]
 imo:                     @[IMO_5]
@@ -122,7 +119,6 @@ ny:                      @[NY_5]
 dx:                      @[DX_5]
 dy:                      @[DY_5]
 </output_grid_05>
-
 <output_grid_06>
 output_grid:             @[OUTPUT_GRID_6]
 imo:                     @[IMO_6]
