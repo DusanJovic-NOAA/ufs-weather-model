@@ -5,19 +5,19 @@ export TEST_DESCR="Fully coupled FV3-CCPP-GOCART-MOM6-CICE-CMEPS system - C192 M
 
 export CNTL_DIR="cpld_control_c192_p8"
 
-export LIST_FILES="sfcf036.tile1.nc \
-                   sfcf036.tile2.nc \
-                   sfcf036.tile3.nc \
-                   sfcf036.tile4.nc \
-                   sfcf036.tile5.nc \
-                   sfcf036.tile6.nc \
-                   atmf036.tile1.nc \
-                   atmf036.tile2.nc \
-                   atmf036.tile3.nc \
-                   atmf036.tile4.nc \
-                   atmf036.tile5.nc \
-                   atmf036.tile6.nc \
-                   gocart.inst_aod.20210323_1800z.nc4 \
+export LIST_FILES="sfcf030.tile1.nc \
+                   sfcf030.tile2.nc \
+                   sfcf030.tile3.nc \
+                   sfcf030.tile4.nc \
+                   sfcf030.tile5.nc \
+                   sfcf030.tile6.nc \
+                   atmf030.tile1.nc \
+                   atmf030.tile2.nc \
+                   atmf030.tile3.nc \
+                   atmf030.tile4.nc \
+                   atmf030.tile5.nc \
+                   atmf030.tile6.nc \
+                   gocart.inst_aod.20210323_1200z.nc4 \
                    RESTART/coupler.res \
                    RESTART/fv_core.res.nc \
                    RESTART/fv_core.res.tile1.nc \
@@ -51,16 +51,18 @@ export LIST_FILES="sfcf036.tile1.nc \
                    RESTART/sfc_data.tile5.nc \
                    RESTART/sfc_data.tile6.nc \
                    RESTART/MOM.res.nc \
-                   RESTART/iced.2021-03-23-64800.nc \
-                   RESTART/ufs.cpld.cpl.r.2021-03-23-64800.nc"
+                   RESTART/iced.2021-03-23-43200.nc \
+                   RESTART/ufs.cpld.cpl.r.2021-03-23-43200.nc"
 
 export_fv3
 export_cpl
 
-export DAYS=1.5
-export FHMAX=36
-export RESTART_N=12
+export DAYS=1.25
+export FHMAX=30
+export RESTART_N=15
 export RESTART_INTERVAL="${RESTART_N} -1"
+export OUTPUT_FH="3 -1"
+export FHZERO=3
 
 export DOMAINS_STACK_SIZE=16000000
 

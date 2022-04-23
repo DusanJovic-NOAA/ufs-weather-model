@@ -1045,6 +1045,8 @@ export RST_BEG=$RUN_BEG
 export RST_2_BEG=$RUN_BEG
 export RST_END=$RUN_END
 export RST_2_END=$RUN_END
+# ATMA
+export AOD_FRQ=010000
 
 # Regional
 export WRITE_RESTART_WITH_BCS=.false.
@@ -1138,7 +1140,7 @@ export ATMTILESIZE=`expr $NPX - 1`
 export FRAC_GRID=.true.
 export CCPP_SUITE=FV3_GFS_v17_coupled_p8
 export INPUT_NML=cpld_control.nml.IN
-export FIELD_TABLE=field_table_thompson_noaero_tke 
+export FIELD_TABLE=field_table_thompson_noaero_tke
 export DIAG_TABLE=diag_table_p7.2_template
 
 export DIAG_TABLE_ADDITIONAL=''
@@ -1166,7 +1168,7 @@ export D2_BG_K2=0.04
 export PSM_BC=1
 export DDDMP=0.1
 
-#P8 
+#P8
 export DZ_MIN=6
 
 # P7 Merra2 Aerosols & NSST
@@ -1186,7 +1188,7 @@ export DO_GSL_DRAG_TOFD=.true.
 export DO_UGWP_V1_OROG_ONLY=.false.
 export DO_UGWP_V0_NST_ONLY=.false.
 export LDIAG_UGWP=.false.
-#P8 
+#P8
 export CDMBWD=${CDMBWD_c96}
 
 # P8 RRTMGP
@@ -1229,7 +1231,7 @@ export FNVMXC="'C96.vegetation_greenness.tileX.nc'"
 export FNSLPC="'C96.slope_type.tileX.nc'"
 export FNABSC="'C96.maximum_snow_albedo.tileX.nc'"
 export LANDICE=".false."
-#P8 
+#P8
 export FSICL=0
 export FSICS=0
 
@@ -1238,7 +1240,7 @@ export USE_CICE_ALB=.true.
 export MIN_SEAICE=1.0e-6
 export DNATS=2
 export IMP_PHYSICS=8
-export LGFDLMPRAD=.false. 
+export LGFDLMPRAD=.false.
 export DO_SAT_ADJ=.false.
 
 # P7 default mushy thermo
@@ -1312,6 +1314,8 @@ export RST_BEG=$RUN_BEG
 export RST_2_BEG=$RUN_BEG
 export RST_END=$RUN_END
 export RST_2_END=$RUN_END
+# gocart inst_aod output; uses AERO_HIST.rc.IN from parm/gocart directory
+export AOD_FRQ=060000
 
 # checkpoint restarts
 export RESTART_FILE_PREFIX=''
