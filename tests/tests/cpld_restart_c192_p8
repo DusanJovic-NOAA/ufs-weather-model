@@ -61,7 +61,7 @@ export DAYS=1.25
 export FHMAX=30
 export FHROT=15
 export RESTART_N=$((FHMAX-$FHROT))
-export OUTPUT_FH="3 -1"
+export OUTPUT_FH="15 30"
 export FHZERO=3
 
 export RESTART_FILE_PREFIX="${SYEAR}${SMONTH}${SDAY}.$(printf "%02d" $(( ${FHROT} + ${SHOUR} )))0000"
