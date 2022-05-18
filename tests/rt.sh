@@ -9,7 +9,7 @@ die() { echo "$@" >&2; exit 1; }
 usage() {
   set +x
   echo
-  echo "Usage: $0 -c | -e | -h | -k | -w | -d | -l <file> | -m | -n <name> | -r "
+  echo "Usage: $0 -c | -e | -h | -k | -w | -d | -l <file> | -o <name> | -m | -n <name> | -r "
   echo
   echo "  -c  create new baseline results"
   echo "  -e  use ecFlow workflow manager"
@@ -18,6 +18,7 @@ usage() {
   echo "  -l  runs test specified in <file>"
   echo "  -m  compare against new baseline results"
   echo "  -n  run single test <name>"
+  echo "  -o  run 'ort' tests for <name>"
   echo "  -r  use Rocoto workflow manager"
   echo "  -w  for weekly_test, skip comparing baseline results"
   echo "  -d  delete run direcotries that are not used by other tests"
@@ -65,6 +66,50 @@ rt_single() {
 
   if [[ ! -f $TESTS_FILE ]]; then
     echo "$SINGLE_NAME does not exist or cannot be run on $MACHINE_ID"
+    exit 1
+  fi
+}
+
+rt_ort() {
+  local compile_line=''
+  local run_line=''
+  while read -r line || [ "$line" ]; do
+    line="${line#"${line%%[![:space:]]*}"}"
+    [[ ${#line} == 0 ]] && continue
+    [[ $line == \#* ]] && continue
+
+    if [[ $line == COMPILE* ]] ; then
+      MAKE_OPT=$(echo $line | cut -d'|' -f2 | sed -e 's/^ *//' -e 's/ *$//')
+      MACHINES=$(echo $line | cut -d'|' -f3 | sed -e 's/^ *//' -e 's/ *$//')
+      if [[ ${MACHINES} == '' ]]; then
+        compile_line=$line
+      elif [[ ${MACHINES} == -* ]]; then
+        [[ ${MACHINES} =~ ${MACHINE_ID} ]] || compile_line=$line
+      elif [[ ${MACHINES} == +* ]]; then
+        [[ ${MACHINES} =~ ${MACHINE_ID} ]] && compile_line=$line
+      fi
+    fi
+
+    if [[ $line =~ RUN ]]; then
+      TEST_NAME=$(echo $line | cut -d'|' -f2 | sed -e 's/^ *//' -e 's/ *$//')
+      MACHINES=$( echo $line | cut -d'|' -f3 | sed -e 's/^ *//' -e 's/ *$//')
+      CB=$(       echo $line | cut -d'|' -f4 | sed -e 's/^ *//' -e 's/ *$//')
+      if [[ $ORT_NAME == $TEST_NAME && $compile_line != '' ]]; then
+        echo "COMPILE | ${MAKE_OPT} | ${MACHINES} | | "             >$ORT_TESTS_FILE
+        echo "RUN | ${TEST_NAME}         | ${MACHINES} | ${CB} | " >>$ORT_TESTS_FILE
+        echo "RUN | ${TEST_NAME}_threads | ${MACHINES} | ${CB} | " >>$ORT_TESTS_FILE
+        echo "RUN | ${TEST_NAME}_decomp  | ${MACHINES} | ${CB} | " >>$ORT_TESTS_FILE
+        echo "RUN | ${TEST_NAME}_mpi     | ${MACHINES} | ${CB} | " >>$ORT_TESTS_FILE
+        echo "RUN | ${TEST_NAME}_restart | ${MACHINES} | ${CB} | ${TEST_NAME} " >>$ORT_TESTS_FILE
+        echo "COMPILE | ${MAKE_OPT} -DDEBUG=ON | ${MACHINES} | | " >>$ORT_TESTS_FILE
+        echo "RUN | ${TEST_NAME}_debug   | ${MACHINES} | ${CB} | " >>$ORT_TESTS_FILE
+        break
+      fi
+    fi
+  done < "${TESTS_FILE}"
+
+  if [[ ! -f $ORT_TESTS_FILE ]]; then
+    echo "$ORT_NAME does not exist or cannot be run on $MACHINE_ID"
     exit 1
   fi
 }
@@ -422,13 +467,14 @@ ROCOTO=false
 ECFLOW=false
 KEEP_RUNDIR=false
 SINGLE_NAME=''
+ORT_NAME=''
 TEST_35D=false
 export skip_check_results=false
 export delete_rundir=false
 
 TESTS_FILE='rt.conf'
 
-while getopts ":cl:mn:dwkreh" opt; do
+while getopts ":cl:mn:o:dwkreh" opt; do
   case $opt in
     c)
       CREATE_BASELINE=true
@@ -444,6 +490,11 @@ while getopts ":cl:mn:dwkreh" opt; do
       SINGLE_NAME=$OPTARG
       TESTS_FILE='rt.conf.single'
       rm -f $TESTS_FILE
+      ;;
+    o)
+      ORT_NAME=$OPTARG
+      ORT_TESTS_FILE='rt.conf.ort'
+      rm -f $ORT_TESTS_FILE
       ;;
     d)
       export delete_rundir=true
@@ -479,6 +530,11 @@ done
 
 if [[ $SINGLE_NAME != '' ]]; then
   rt_single
+fi
+
+if [[ $ORT_NAME != '' ]]; then
+  rt_ort
+  TESTS_FILE=$ORT_TESTS_FILE
 fi
 
 if [[ $TESTS_FILE =~ '35d' ]] || [[ $TESTS_FILE =~ 'weekly' ]]; then

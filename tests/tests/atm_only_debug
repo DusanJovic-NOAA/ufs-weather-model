@@ -1,0 +1,7 @@
+
+source tests/atm_only
+
+export LIST_FILES=''
+
+export FHMAX=1
+export OUTPUT_FH="0 1"

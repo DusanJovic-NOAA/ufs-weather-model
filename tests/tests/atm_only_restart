@@ -1,0 +1,19 @@
+
+source tests/atm_only
+
+
+LIST_FILES="sfcf024.nc \
+            atmf024.nc \
+            GFSFLX.GrbF24 \
+            GFSPRS.GrbF24"
+
+FHROT=12
+
+WARM_START=.true.
+NGGPS_IC=.false.
+EXTERNAL_IC=.false.
+MAKE_NH=.false.
+MOUNTAIN=.true.
+NA_INIT=0
+
+RESTART_FILE_PREFIX="${SYEAR}${SMONTH}${SDAY}.$(printf "%02d" $(( ${SHOUR} + ${FHROT}  )))0000"

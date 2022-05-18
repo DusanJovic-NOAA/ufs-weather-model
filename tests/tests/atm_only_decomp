@@ -1,0 +1,7 @@
+
+source tests/atm_only
+
+temp=$INPES
+INPES=$JNPES
+JNPES=$temp
+
