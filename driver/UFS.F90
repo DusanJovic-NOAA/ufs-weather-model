@@ -56,7 +56,7 @@
                 ,YY,MM,DD                                               &  !<-- Time variables for date
                 ,HH,MNS,SEC                                                !<-- Time variables for time of day
 
-      REAL(8) :: fhrot                                                     !< forecast hour at restart time
+      REAL(ESMF_KIND_R8) :: fhrot                                          !< forecast hour at restart time
 !
       REAL :: NHOURS_FCST                                                  !<-- Length of forecast in hours
 
@@ -348,10 +348,10 @@
 !***  This will correctly set the UFS Driver clocks in case of
 !***  Restart-From-History.
 !-----------------------------------------------------------------------
-      fhrot = 0.
-      CALL ESMF_ConfigGetAttribute(config   = CF_MAIN  &
-                                   ,value   = fhrot    &
-                                   ,label   = 'fhrot:' &
+      CALL ESMF_ConfigGetAttribute(config   = CF_MAIN          &
+                                   ,value   = fhrot            &
+                                   ,label   = 'fhrot:'         &
+                                   ,default = 0.0_ESMF_KIND_R8 &
                                    ,rc      = RC)
       ESMF_ERR_ABORT(RC)
 
