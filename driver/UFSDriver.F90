@@ -100,6 +100,10 @@
       use MED,              only: MED_SS     => SetServices, &
                                   MED_SV     => SetVM
 #endif
+  ! - UFS I/O
+#ifdef FRONT_UFSIO
+      use SWIO,             only: UFSIO_SS   => SetServices
+#endif
 !
 !-----------------------------------------------------------------------
 !
@@ -514,6 +518,14 @@
           if (trim(model) == "cmeps") then
             call NUOPC_DriverAddComp(driver, trim(prefix), MED_SS, &
                MED_SV, info=info, petList=petList, comp=comp, rc=rc)
+            if (ChkErr(rc,__LINE__,u_FILE_u)) return
+            found_comp = .true.
+          end if
+#endif
+#ifdef FRONT_UFSIO
+          if (trim(model) == "ufsio") then
+            call NUOPC_DriverAddComp(driver, trim(prefix), UFSIO_SS, &
+               info=info, petList=petList, comp=comp, rc=rc)
             if (ChkErr(rc,__LINE__,u_FILE_u)) return
             found_comp = .true.
           end if

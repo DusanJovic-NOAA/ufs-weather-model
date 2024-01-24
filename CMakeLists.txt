@@ -255,6 +255,11 @@ if(NOAHMP)
 endif()
 
 ###############################################################################
+### UFS I/O Components [UFSIO]
+###############################################################################
+add_subdirectory(UFSIO)
+
+###############################################################################
 ### UFS Library
 ###############################################################################
 add_library(ufs driver/UFSDriver.F90)
@@ -331,6 +336,9 @@ if(NOAHMP)
   list(APPEND _ufs_defs_private FRONT_NOAHMP=lnd_comp_nuopc)
   list(APPEND _ufs_libs_public noahmp)
 endif()
+
+list(APPEND _ufs_defs_private FRONT_UFSIO=ufsio_comp_nuopc)
+list(APPEND _ufs_libs_public ufsio)
 
 target_compile_definitions(ufs PRIVATE "${_ufs_defs_private}")
 target_link_libraries(ufs PUBLIC "${_ufs_libs_public}")
