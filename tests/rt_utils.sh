@@ -77,17 +77,25 @@ function compute_petbounds_and_tasks() {
      n=$((n + LND_tasks))
   fi
 
+  # ICEIO
+  if [[ ${ICEIO_tasks:-0} -gt 0 ]]; then
+     ICEIO_tasks=$((ICEIO_tasks * iceio_omp_num_threads))
+     iceio_petlist_bounds="${n} $((n + ICEIO_tasks - 1))"
+     n=$((n + ICEIO_tasks))
+  fi
+
   UFS_tasks=${n}
 
-  echo "ATM_petlist_bounds: ${atm_petlist_bounds:-}"
-  echo "OCN_petlist_bounds: ${ocn_petlist_bounds:-}"
-  echo "ICE_petlist_bounds: ${ice_petlist_bounds:-}"
-  echo "WAV_petlist_bounds: ${wav_petlist_bounds:-}"
-  echo "CHM_petlist_bounds: ${chm_petlist_bounds:-}"
-  echo "MED_petlist_bounds: ${med_petlist_bounds:-}"
-  echo "AQM_petlist_bounds: ${aqm_petlist_bounds:-}"
-  echo "LND_petlist_bounds: ${lnd_petlist_bounds:-}"
-  echo "UFS_tasks         : ${UFS_tasks:-}"
+  echo "ATM_petlist_bounds:   ${atm_petlist_bounds:-}"
+  echo "OCN_petlist_bounds:   ${ocn_petlist_bounds:-}"
+  echo "ICE_petlist_bounds:   ${ice_petlist_bounds:-}"
+  echo "WAV_petlist_bounds:   ${wav_petlist_bounds:-}"
+  echo "CHM_petlist_bounds:   ${chm_petlist_bounds:-}"
+  echo "MED_petlist_bounds:   ${med_petlist_bounds:-}"
+  echo "AQM_petlist_bounds:   ${aqm_petlist_bounds:-}"
+  echo "LND_petlist_bounds:   ${lnd_petlist_bounds:-}"
+  echo "ICEIO_petlist_bounds: ${iceio_petlist_bounds:-}"
+  echo "UFS_tasks:            ${UFS_tasks:-}"
 
   # TASKS is now set to UFS_TASKS
   export TASKS=$UFS_tasks

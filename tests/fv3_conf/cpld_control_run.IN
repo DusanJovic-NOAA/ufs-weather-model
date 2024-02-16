@@ -197,3 +197,8 @@ fi
 if [ $CPLCHM = .true. ]; then
   ln -sf  @[INPUTDATA_ROOT]/GOCART/p8c_5d/ExtData .
 fi
+
+#ufsio
+if [ $TEST_NAME = 'cpld_control_p8_ufsio' ]; then
+  cp ${PATHRT}/parm/ufsio.cice6.rc .
+fi
