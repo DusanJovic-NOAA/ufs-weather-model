@@ -1169,7 +1169,7 @@
      - standard_name: Sl_sfrac
        alias: inst_snow_area_fraction_lnd
        canonical_units: 1
-       description: land export 
+       description: land export
      #
      - standard_name: Sl_tref
        alias: inst_temp_height2m_lnd
@@ -1201,7 +1201,7 @@
        canonical_units: W m-2
        description: land export
      #
-     - standard_name: Fall_gflx 
+     - standard_name: Fall_gflx
        alias: inst_upward_heat_flux_lnd
        canonical_units: W m-2
        description: land export
@@ -1222,7 +1222,7 @@
        description: land export
      #
      - standard_name: Sl_chh
-       alias: inst_drag_mass_flux_for_heat_and_moisture 
+       alias: inst_drag_mass_flux_for_heat_and_moisture
        canonical_units: kg m-2 s-1
        description: land export
      #
@@ -1230,3 +1230,107 @@
        alias: inst_func_of_roughness_length_and_vfrac
        canonical_units: 1
        description: land export
+
+     # UFSIO (CICE6 restart)
+     - standard_name: uvel
+       canonical_units: m s-1
+     - standard_name: vvel
+       canonical_units: m s-1
+     - standard_name: coszen
+       canonical_units: 1
+     - standard_name: scale_factor
+       canonical_units: 1
+     - standard_name: swvdr
+       canonical_units: 1
+     - standard_name: swvdf
+       canonical_units: 1
+     - standard_name: swidr
+       canonical_units: 1
+     - standard_name: swidf
+       canonical_units: 1
+     - standard_name: strocnxT
+       canonical_units: 1
+     - standard_name: strocnyT
+       canonical_units: 1
+     - standard_name: stressp_1
+       canonical_units: 1
+     - standard_name: stressp_2
+       canonical_units: 1
+     - standard_name: stressp_3
+       canonical_units: 1
+     - standard_name: stressp_4
+       canonical_units: 1
+     - standard_name: stressm_1
+       canonical_units: 1
+     - standard_name: stressm_2
+       canonical_units: 1
+     - standard_name: stressm_3
+       canonical_units: 1
+     - standard_name: stressm_4
+       canonical_units: 1
+     - standard_name: stress12_1
+       canonical_units: 1
+     - standard_name: stress12_2
+       canonical_units: 1
+     - standard_name: stress12_3
+       canonical_units: 1
+     - standard_name: stress12_4
+       canonical_units: 1
+     - standard_name: aicen
+       canonical_units: 1
+     - standard_name: vicen
+       canonical_units: 1
+     - standard_name: vsnon
+       canonical_units: 1
+     - standard_name: sice001
+       canonical_units: 1
+     - standard_name: sice002
+       canonical_units: 1
+     - standard_name: sice003
+       canonical_units: 1
+     - standard_name: sice004
+       canonical_units: 1
+     - standard_name: sice005
+       canonical_units: 1
+     - standard_name: sice006
+       canonical_units: 1
+     - standard_name: sice007
+       canonical_units: 1
+     - standard_name: qice001
+       canonical_units: 1
+     - standard_name: qice002
+       canonical_units: 1
+     - standard_name: qice003
+       canonical_units: 1
+     - standard_name: qice004
+       canonical_units: 1
+     - standard_name: qice005
+       canonical_units: 1
+     - standard_name: qice006
+       canonical_units: 1
+     - standard_name: qice007
+       canonical_units: 1
+     - standard_name: qsno001
+       canonical_units: 1
+     - standard_name: iceumask
+       canonical_units: 1
+     - standard_name: fsnow
+       canonical_units: 1
+     - standard_name: Tsfcn
+       canonical_units: 1
+     - standard_name: iage
+       canonical_units: 1
+     - standard_name: alvl
+       canonical_units: 1
+     - standard_name: vlvl
+       canonical_units: 1
+     - standard_name: apnd
+       canonical_units: 1
+     - standard_name: hpnd
+       canonical_units: 1
+     - standard_name: ipnd
+       canonical_units: 1
+     - standard_name: dhs
+       canonical_units: 1
+     - standard_name: ffrac
+       canonical_units: 1

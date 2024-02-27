@@ -5,10 +5,57 @@
 #  Imported fields
 #
 import_fields::
-    Si_imask
-    Si_tref
-    Si_snowh
-    Si_u10
+ uvel
+ vvel
+ coszen
+ scale_factor
+ swvdr
+ swvdf
+ swidr
+ swidf
+ strocnxT
+ strocnyT
+ stressp_1
+ stressp_2
+ stressp_3
+ stressp_4
+ stressm_1
+ stressm_2
+ stressm_3
+ stressm_4
+ stress12_1
+ stress12_2
+ stress12_3
+ stress12_4
+ iceumask
+ fsnow
+ aicen
+ vicen
+ vsnon
+ Tsfcn
+ iage
+ alvl
+ vlvl
+ apnd
+ hpnd
+ ipnd
+ dhs
+ ffrac
+ sice001
+ qice001
+ sice002
+ qice002
+ sice003
+ qice003
+ sice004
+ qice004
+ sice005
+ qice005
+ sice006
+ qice006
+ sice007
+ qice007
+ qsno001
 ::
 #
 #  Output fields
@@ -18,10 +65,57 @@ import_fields::
 #
 #  <import_field_name>    [<output_variable_name>]
 output_fields::
-    Si_imask
-    Si_tref
-    Si_snowh
-    Si_u10
+ uvel
+ vvel
+ coszen
+ scale_factor
+ swvdr
+ swvdf
+ swidr
+ swidf
+ strocnxT
+ strocnyT
+ stressp_1
+ stressp_2
+ stressp_3
+ stressp_4
+ stressm_1
+ stressm_2
+ stressm_3
+ stressm_4
+ stress12_1
+ stress12_2
+ stress12_3
+ stress12_4
+ iceumask
+ fsnow
+ aicen
+ vicen
+ vsnon
+ Tsfcn
+ iage
+ alvl
+ vlvl
+ apnd
+ hpnd
+ ipnd
+ dhs
+ ffrac
+ sice001
+ qice001
+ sice002
+ qice002
+ sice003
+ qice003
+ sice004
+ qice004
+ sice005
+ qice005
+ sice006
+ qice006
+ sice007
+ qice007
+ qsno001
 ::
 #
 #  Imported masking field
@@ -52,7 +146,7 @@ output_format: pnetcdf
 # - double : write variables as real, double precision
 # - native : write variables using their original type
 #
-output_datatype: float
+output_datatype: native
 #
 # Output file prefix.
 #
@@ -61,7 +155,7 @@ output_datatype: float
 # where:
 #   <prefix>   : is the string provided via
 #                output_file_prefix keyword
-#   <datetime> : inported field timestamp,
+#   <datetime> : imported field timestamp,
 #                formatted as: YYYYMMDD_hhmmss
 #   <suffix>   : determined from output format:
 #                'hd5' for hdf5, 'nc' for pnetcdf
