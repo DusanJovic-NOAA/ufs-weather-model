@@ -88,7 +88,7 @@ ICEIO_attributes::
 
 # CMEPS warm run sequence
 runSeq::
-@10800
+@43200    # 12h
    @@[coupling_interval_slow_sec]
       MED med_phases_prep_ocn_avg
       MED -> OCN :remapMethod=redist
@@ -121,7 +121,7 @@ runSeq::
       MED med_phases_post_ocn
       MED med_phases_restart_write
    @
-   ICE -> ICEIO
+   ICE -> ICEIO :remapMethod=redist
    ICEIO
 @
 ::

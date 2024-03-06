@@ -160,7 +160,7 @@ output_datatype: native
 #   <suffix>   : determined from output format:
 #                'hd5' for hdf5, 'nc' for pnetcdf
 #
-output_file_prefix: ufsio_cice6
+#output_file_prefix: ufsio_cice6
 #
 # Output metadata.
 #
@@ -169,12 +169,12 @@ output_file_prefix: ufsio_cice6
 # row entries in the table below. If <value> is
 # missing, it will be set to "N/A".
 #
-output_metadata::
-  init_date     20210322_060000
-  start_date    20210322_060000
-  end_date      20210323_060000
-  fcst_date     __swio_field_timestamp__
-::
+#output_metadata::
+#  init_date     20210322_060000
+#  start_date    20210322_060000
+#  end_date      20210323_060000
+#  fcst_date     __swio_field_timestamp__
+#::
 #
 # Output grid type.
 #
