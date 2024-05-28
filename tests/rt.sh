@@ -259,7 +259,6 @@ EOF
           if grep -q "quota" "${LOG_DIR}/compile_${COMPILE_ID}.log"; then
             COMPILE_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
-          #elif grep -q "timeout" "${LOG_DIR}/compile_${COMPILE_ID}.log"; then
           elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"; then
             COMPILE_RESULT="FAILED: COMPILE TIMED OUT"
             FAIL_LOG="${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"
@@ -358,8 +357,7 @@ EOF
           if grep -q "quota" "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"; then
             TEST_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-          #elif grep -q "timeout" "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"; then
-          elif grep -q "timeout" "${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/out"; then
+          elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"; then
             TEST_RESULT="FAILED: TEST TIMED OUT"
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
           fi
