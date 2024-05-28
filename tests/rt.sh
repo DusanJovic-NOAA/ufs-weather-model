@@ -359,7 +359,7 @@ EOF
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
           elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"; then
             TEST_RESULT="FAILED: TEST TIMED OUT"
-            FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
+            FAIL_LOG="${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"
           fi
         else
           TEST_RESULT="PASS"
