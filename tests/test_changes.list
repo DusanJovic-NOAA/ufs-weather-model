@@ -1,1 +1,2 @@
-cpld_control_gfsv17_iau intel
+control_wam intel
+control_wam_debug intel
