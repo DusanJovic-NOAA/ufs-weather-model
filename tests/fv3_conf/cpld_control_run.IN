@@ -201,4 +201,5 @@ fi
 #prognostic aerosols
 if [ $CPLCHM = .true. ]; then
   ln -sf  @[INPUTDATA_ROOT]/GOCART/p8c_5d/ExtData .
+  cp      ${PATHRT}/parm/gocart/so2_volcanic_emissions_CARN_v202401.degassing_only.rc .
 fi
