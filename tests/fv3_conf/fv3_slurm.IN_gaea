@@ -7,7 +7,6 @@
 #SBATCH --clusters=c5
 #SBATCH --partition=batch
 #SBATCH --nodes=@[NODES]
-#SBATCH --ntasks-per-node=@[TPN]
 #SBATCH --time=@[WLCLK]
 
 set -eux
@@ -40,7 +39,7 @@ if [ "${JOB_SHOULD_FAIL:-NO}" = WHEN_RUNNING ] ; then
     false
 fi
 
-srun --label -n @[TASKS] ./fv3.exe
+srun --label @[SRUN_CMD_ARGS]
 
 echo "Model ended:    " `date`
 echo -n " $( date +%s )," >> job_timestamp.txt

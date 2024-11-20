@@ -422,6 +422,9 @@ export esmf_logkind="ESMF_LOGKIND_MULTI"
 export DumpFields="false"
 export MED_history_n=1000000
 
+export ESMF_THREADING=true
+export MPMD=false
+
 export_fv3_v16 ()
 {
 # Add support for v16 test cases. This section

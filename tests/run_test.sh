@@ -163,10 +163,19 @@ else
   exit 1
 fi
 
-compute_petbounds_and_tasks
+if [[ ${ESMF_THREADING} == true ]]; then
+  compute_petbounds_and_tasks_esmf_threading
+else
+  compute_petbounds_and_tasks_traditional_threading
+fi
 
 if [[ -f ${PATHRT}/parm/${UFS_CONFIGURE} ]]; then
-  atparse < "${PATHRT}/parm/${UFS_CONFIGURE}" > ufs.configure
+  (
+    atparse < "${PATHRT}/parm/${UFS_CONFIGURE}" > ufs.configure
+    if [[ ${ESMF_THREADING} != true ]]; then
+       sed -i -e "/_omp_num_threads:/d" ufs.configure
+    fi
+  )
 else
   echo "Cannot find file ${UFS_CONFIGURE} set by variable UFS_CONFIGURE"
   exit 1
@@ -240,7 +249,7 @@ fi
 if [[ "Q${FIELD_TABLE:-}" != Q ]]; then
   cp "${PATHRT}/parm/field_table/${FIELD_TABLE}" field_table
 fi
-    
+
 # fix files
 if [[ ${FV3} == true ]]; then
   cp "${INPUTDATA_ROOT}"/FV3_fix/*.txt .
@@ -355,6 +364,7 @@ if [[ -n "${coupling_interval_slow_sec+x}" && -n "${coupling_interval_fast_sec+x
   fi
 fi
 
+mpmd_tpn=${TPN}
 TPN=$(( TPN / THRD ))
 if (( TASKS < TPN )); then
   TPN=${TASKS}
@@ -367,18 +377,60 @@ if (( NODES * TPN < TASKS )); then
 fi
 export NODES
 
-UFS_TASKS=${TASKS}
-TASKS=$(( NODES * TPN ))
-export TASKS
+if [[ ${ESMF_THREADING} == true ]]; then
+  UFS_TASKS=${TASKS}
+  TASKS=$(( NODES * TPN ))
+  export TASKS
 
-PPN=$(( UFS_TASKS / NODES ))
-if (( UFS_TASKS - ( PPN * NODES ) > 0 )); then
-  PPN=$((PPN + 1))
+  PPN=$(( UFS_TASKS / NODES ))
+  if (( UFS_TASKS - ( PPN * NODES ) > 0 )); then
+    PPN=$((PPN + 1))
+  fi
+  export PPN
+  export UFS_TASKS
+else
+  PPN=${TPN}
 fi
-export PPN
-export UFS_TASKS
 
 if [[ ${SCHEDULER} = 'pbs' ]]; then
+
+  mpiexec_cmd=""
+  if [[ ${ESMF_THREADING} == false && ${MPMD} == true ]]; then
+    if [[ ${ATM_tasks:-0} -gt 0 ]]; then
+       mpiexec_cmd+=" -n ${ATM_tasks} -ppn $((mpmd_tpn/atm_omp_num_threads)) --cpu-bind core --depth ${atm_omp_num_threads} --env OMP_NUM_THREADS=${atm_omp_num_threads} ./fv3.exe :"
+    fi
+
+    if [[ ${OCN_tasks:-0} -gt 0 ]]; then
+       mpiexec_cmd+=" -n ${OCN_tasks} -ppn $((mpmd_tpn/ocn_omp_num_threads)) --cpu-bind core --depth ${ocn_omp_num_threads} --env OMP_NUM_THREADS=${ocn_omp_num_threads} ./fv3.exe :"
+    fi
+
+    if [[ ${ICE_tasks:-0} -gt 0 ]]; then
+       mpiexec_cmd+=" -n ${ICE_tasks} -ppn $((mpmd_tpn/ice_omp_num_threads)) --cpu-bind core --depth ${ice_omp_num_threads} --env OMP_NUM_THREADS=${ice_omp_num_threads} ./fv3.exe :"
+    fi
+
+    if [[ ${WAV_tasks:-0} -gt 0 ]]; then
+       mpiexec_cmd+=" -n ${WAV_tasks} -ppn $((mpmd_tpn/wav_omp_num_threads)) --cpu-bind core --depth ${wav_omp_num_threads} --env OMP_NUM_THREADS=${wav_omp_num_threads} ./fv3.exe :"
+    fi
+
+    if [[ ${LND_tasks:-0} -gt 0 ]]; then
+       mpiexec_cmd+=" -n ${LND_tasks} -ppn $((mpmd_tpn/lnd_omp_num_threads)) --cpu-bind core --depth ${lnd_omp_num_threads} --env OMP_NUM_THREADS=${lnd_omp_num_threads} ./fv3.exe :"
+    fi
+
+    if [[ ${FBH_tasks:-0} -gt 0 ]]; then
+       mpiexec_cmd+=" -n ${FBH_tasks} -ppn $((mpmd_tpn/fbh_omp_num_threads)) --cpu-bind core --depth ${fbh_omp_num_threads} --env OMP_NUM_THREADS=${fbh_omp_num_threads} ./fv3.exe :"
+    fi
+    # Remove trailing ':'
+    if [[ "${mpiexec_cmd: -1}" == ":" ]]; then
+      mpiexec_cmd="${mpiexec_cmd:0:-1}"
+    fi
+    NODES=${mpmd_nodes}
+  else
+    mpiexec_cmd+="-n ${TASKS} -ppn ${TPN} --cpu-bind core --depth ${THRD} ./fv3.exe"
+  fi
+
+  echo "mpiexec_cmd = ${mpiexec_cmd}"
+  MPIEXEC_CMD_ARGS=${mpiexec_cmd}
+
   if [[ -e ${PATHRT}/fv3_conf/fv3_qsub.IN_${MACHINE_ID} ]]; then
     atparse < "${PATHRT}/fv3_conf/fv3_qsub.IN_${MACHINE_ID}" > job_card
   else
@@ -386,6 +438,37 @@ if [[ ${SCHEDULER} = 'pbs' ]]; then
     exit 1
   fi
 elif [[ ${SCHEDULER} = 'slurm' ]]; then
+
+  srun_cmd=""
+  if [[ ${ESMF_THREADING} == false && ${MPMD} == true ]]; then
+    if [[ ${ATM_tasks:-0} -gt 0 ]]; then
+       srun_cmd+=" --nodes=${atm_nodes} --ntasks=${ATM_tasks} --ntasks-per-node=$((mpmd_tpn/atm_omp_num_threads)) --cpus-per-task=${atm_omp_num_threads} --export=ALL,OMP_NUM_THREADS=${atm_omp_num_threads} ./fv3.exe :"
+    fi
+
+    if [[ ${OCN_tasks:-0} -gt 0 ]]; then
+       srun_cmd+=" --nodes=${ocn_nodes} --ntasks=${OCN_tasks} --ntasks-per-node=$((mpmd_tpn/ocn_omp_num_threads)) --cpus-per-task=${ocn_omp_num_threads} --export=ALL,OMP_NUM_THREADS=${ocn_omp_num_threads} ./fv3.exe :"
+    fi
+
+    if [[ ${ICE_tasks:-0} -gt 0 ]]; then
+       srun_cmd+=" --nodes=${ice_nodes} --ntasks=${ICE_tasks} --ntasks-per-node=$((mpmd_tpn/ice_omp_num_threads)) --cpus-per-task=${ice_omp_num_threads} --export=ALL,OMP_NUM_THREADS=${ice_omp_num_threads} ./fv3.exe :"
+    fi
+
+    if [[ ${WAV_tasks:-0} -gt 0 ]]; then
+       srun_cmd+=" --nodes=${wav_nodes} --ntasks=${WAV_tasks} --ntasks-per-node=$((mpmd_tpn/wav_omp_num_threads)) --cpus-per-task=${wav_omp_num_threads} --export=ALL,OMP_NUM_THREADS=${wav_omp_num_threads} ./fv3.exe :"
+    fi
+
+    # Remove trailing ':'
+    if [[ "${srun_cmd: -1}" == ":" ]]; then
+      srun_cmd="${srun_cmd:0:-1}"
+    fi
+    NODES=${mpmd_nodes}
+  else
+    srun_cmd+=" --ntasks=${TASKS} --ntasks-per-node=${TPN} --cpus-per-task=${THRD} ./fv3.exe"
+  fi
+
+  echo "srun_cmd = ${srun_cmd}"
+  SRUN_CMD_ARGS=${srun_cmd}
+
   if [[ -e ${PATHRT}/fv3_conf/fv3_slurm.IN_${MACHINE_ID} ]]; then
     atparse < "${PATHRT}/fv3_conf/fv3_slurm.IN_${MACHINE_ID}" > job_card
   else
