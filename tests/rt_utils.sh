@@ -98,8 +98,9 @@ function compute_petbounds_and_tasks_traditional_threading() {
   # CHM
   chm_petlist_bounds="0 $((ATM_compute_tasks - 1))"
 
-  # MED
-  med_petlist_bounds="0 $((ATM_compute_tasks - 1))"
+  # MED - mediator (CMEPS) runs on at most 300 tasks.
+  MED_compute_tasks=$((ATM_compute_tasks<=300 ? ATM_compute_tasks : 300))
+  med_petlist_bounds="0 $((MED_compute_tasks - 1))"
 
   # AQM
   aqm_petlist_bounds="0 $((ATM_compute_tasks - 1))"
@@ -192,8 +193,9 @@ function compute_petbounds_and_tasks_esmf_threading() {
   # CHM
   chm_petlist_bounds="0 $((ATM_compute_tasks * atm_omp_num_threads - 1))"
 
-  # MED
-  med_petlist_bounds="0 $((ATM_compute_tasks * atm_omp_num_threads - 1))"
+  # MED - mediator (CMEPS) runs on at most 300 tasks.
+  MED_compute_tasks=$((ATM_compute_tasks<=300 ? ATM_compute_tasks : 300))
+  med_petlist_bounds="0 $((MED_compute_tasks * atm_omp_num_threads - 1))"
 
   # AQM
   aqm_petlist_bounds="0 $((ATM_compute_tasks * atm_omp_num_threads - 1))"

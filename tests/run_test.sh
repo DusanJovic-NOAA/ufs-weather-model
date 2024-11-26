@@ -428,8 +428,8 @@ if [[ ${SCHEDULER} = 'pbs' ]]; then
     mpiexec_cmd+="-n ${TASKS} -ppn ${TPN} --cpu-bind core --depth ${THRD} ./fv3.exe"
   fi
 
-  echo "mpiexec_cmd = ${mpiexec_cmd}"
   MPIEXEC_CMD_ARGS=${mpiexec_cmd}
+  echo "MPIEXEC_CMD_ARGS = ${MPIEXEC_CMD_ARGS}"
 
   if [[ -e ${PATHRT}/fv3_conf/fv3_qsub.IN_${MACHINE_ID} ]]; then
     atparse < "${PATHRT}/fv3_conf/fv3_qsub.IN_${MACHINE_ID}" > job_card
@@ -466,8 +466,8 @@ elif [[ ${SCHEDULER} = 'slurm' ]]; then
     srun_cmd+=" --ntasks=${TASKS} --ntasks-per-node=${TPN} --cpus-per-task=${THRD} ./fv3.exe"
   fi
 
-  echo "srun_cmd = ${srun_cmd}"
   SRUN_CMD_ARGS=${srun_cmd}
+  echo "SRUN_CMD_ARGS = ${SRUN_CMD_ARGS}"
 
   if [[ -e ${PATHRT}/fv3_conf/fv3_slurm.IN_${MACHINE_ID} ]]; then
     atparse < "${PATHRT}/fv3_conf/fv3_slurm.IN_${MACHINE_ID}" > job_card
