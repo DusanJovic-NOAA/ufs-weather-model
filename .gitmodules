@@ -1,8 +1,8 @@
 [submodule "UFSATM"]
   path = UFSATM
-  #url = https://github.com/NOAA-EMC/fv3atm
+  #url = https://github.com/NOAA-EMC/ufsatm
   #branch = develop
-  url = https://github.com/DusanJovic-NOAA/fv3atm
+  url = https://github.com/DusanJovic-NOAA/ufsatm
   branch = sfc_v2_att
 [submodule "WW3"]
   path = WW3
