@@ -3,7 +3,7 @@
   #url = https://github.com/NOAA-EMC/fv3atm
   #branch = production/RRFS.v1
   url = https://github.com/DusanJovic-NOAA/fv3atm
-  branch = rrfs_v1_conus13km_tests
+  branch = rrfs_v1_tracing
 [submodule "WW3"]
   path = WW3
   url = https://github.com/NOAA-EMC/WW3
