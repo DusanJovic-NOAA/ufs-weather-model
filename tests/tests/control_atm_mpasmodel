@@ -1,0 +1,30 @@
+###############################################################################
+#
+# ATM test with MPASMODEL.
+#
+###############################################################################
+
+export TEST_DESCR="Build UWM with MPASMODEL"
+
+export CNTL_DIR=control_atm_mpasmodel
+
+export LIST_FILES="history.2025-11-06_00.00.00.nc \
+                   history.2025-11-06_18.00.00.nc \
+                   history.2025-11-07_00.00.00.nc \
+                   restart.2025-11-06_12.00.00.nc \
+                   restart.2025-11-07_00.00.00.nc"
+
+export_mpasmodel
+
+export ATM_compute_tasks=12
+export FV3_RUN=atm_mpasmodel_run.IN
+export MODEL_CONFIGURE=model_configure_mpasmodel.IN
+
+export INPUTDATA_ROOT=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
+
+export nccmp_exclude_attr="--globalex=file_id"
+
+export IC_FILENAME=x1.40962.init.nc
+export GRID_FILENAME=x1.40962.graph.info.part.
+
+

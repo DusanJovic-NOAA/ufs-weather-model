@@ -1,0 +1,26 @@
+start_year:              2025
+start_month:             11
+start_day:               6
+start_hour:              0
+start_minute:            0
+start_second:            0
+nhours_fcst:             24
+fhrot:                   0
+
+dt_atmos:                1800
+restart_interval:        0
+restart_fh:
+
+quilting:                .false.
+quilting_restart:        .false.
+write_groups:            1
+write_tasks_per_group:   2
+itasks:                  1
+output_history:          .true.
+history_file_on_native_grid: .true.
+num_files:               2
+fv3atm_output_dir:       ./
+filename_base:           'atm' 'sfc'
+output_file:             'netcdf'
+
+output_fh:               3 -1

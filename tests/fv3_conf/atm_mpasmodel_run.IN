@@ -1,0 +1,3 @@
+# MPASMODEL input data
+
+cp  @[INPUTDATA_ROOT]/MPASMODEL/atm_mpasmodel/* .

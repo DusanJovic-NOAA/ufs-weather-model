@@ -628,6 +628,59 @@ export_mpas ()
     export DOMAINS_STACK_SIZE=3000000
 }
 
+export_mpasmodel ()
+{
+    # ufs.configure defaults
+    export UFS_CONFIGURE=ufs.configure.atm.IN
+    export MODEL_CONFIGURE=mpasatm_configure.IN
+    export atm_model=mpas
+
+    export MPAS=false
+    export FV3=false
+    export S2S=false
+    export HAFS=false
+    export AQM=false
+    export FIRE_BEHAVIOR=false
+    export DATM_CDEPS=false
+    export DOCN_CDEPS=false
+    export DICE_CDEPS=false
+    export CICE_PRESCRIBED=false
+    export CDEPS_INLINE=false
+    export POSTAPP='global'
+
+    # MPAS dynamical core defaults for RRFS
+    export MPAS_RESOLUTION=120
+
+    export ATM_compute_tasks=4
+
+    #DJS2025 START: We don't need this for MPAS, but to setup the tests we do. CLEAN THIS UP!!!
+    #Set defaults if ATMRES and DT_ATMOS are not set
+    export ATMRES=${ATMRES:-"C96"}
+    export DT_ATMOS=${DT_ATMOS:-"1800"}
+
+    export CPLWAV=.false.
+    export CPLCHM=.false.
+    export CPLWAV2ATM=.false.
+
+    # DJS2025: This is needed by rt_utils.sh, but not applicable to MPAS forecasts yet...
+    export NTILES=1
+    export QUILTING=.false.
+    export QUILTING_RESTART=.false.
+
+    # DJS2025: Needed for mpasatm_configure
+    export RESTART_INTERVAL=0
+    export ITASKS=1
+    export OUTPUT_HISTORY=.true.
+    export HISTORY_FILE_ON_NATIVE_GRID=.true.
+    export NUM_FILES=2
+    export FV3ATM_OUTPUT_DIR="./"
+    export FILENAME_BASE="'atm' 'sfc'"
+    export OUTPUT_GRID="'mpas'"
+    export OUTPUT_FILE="'netcdf'"
+    export ZSTANDARD_LEVEL=0
+
+}
+
 export_gfs_physics ()
 {
     # Radiation

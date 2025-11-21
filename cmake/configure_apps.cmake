@@ -13,7 +13,7 @@
 ###############################################################################
 ### Configure Application Components
 ###############################################################################
-if(APP MATCHES "^(ATM|ATMW|ATMWM|ATMAQ|ATML|ATMF|ATML-LM4|ATMMPAS)$")
+if(APP MATCHES "^(ATM|ATMW|ATMWM|ATMAQ|ATML|ATMF|ATML-LM4|ATMMPAS|MPASMODEL)$")
   set(FMS        ON  CACHE BOOL "Enable FMS"                 FORCE)
   set(FV3        ON  CACHE BOOL "Enable FV3"                 FORCE)
   set(STOCH_PHYS ON  CACHE BOOL "Enable Stochastic Physics"  FORCE)
@@ -38,6 +38,11 @@ if(APP MATCHES "^(ATM|ATMW|ATMWM|ATMAQ|ATML|ATMF|ATML-LM4|ATMMPAS)$")
     #          rely on different dycores, this logic will need to expand to choose the
     #          correct dycore.
     set(FV3      OFF CACHE BOOL "Disable FV3 dycore"         FORCE)
+    message("Configuring UFS app in Atmosphere with MPAS dycore")
+  elseif(APP MATCHES "MPASMODEL")
+    set(MPASMODEL     ON  CACHE BOOL "Enable MPAS Model"         FORCE)
+    set(FV3      OFF CACHE BOOL "Disable FV3 dycore"         FORCE)
+    set(STOCH_PHYS OFF  CACHE BOOL "Enable Stochastic Physics"  FORCE)
     message("Configuring UFS app in Atmosphere with MPAS dycore")
   elseif(APP MATCHES "ATML-LM4")
     set(CMEPS    ON  CACHE BOOL "Enable CMEPS"               FORCE)
