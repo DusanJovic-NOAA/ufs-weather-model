@@ -666,19 +666,8 @@ export_mpasmodel ()
     export NTILES=1
     export QUILTING=.false.
     export QUILTING_RESTART=.false.
-
-    # DJS2025: Needed for mpasatm_configure
-    export RESTART_INTERVAL=0
-    export ITASKS=1
-    export OUTPUT_HISTORY=.true.
-    export HISTORY_FILE_ON_NATIVE_GRID=.true.
-    export NUM_FILES=2
-    export FV3ATM_OUTPUT_DIR="./"
-    export FILENAME_BASE="'atm' 'sfc'"
-    export OUTPUT_GRID="'mpas'"
-    export OUTPUT_FILE="'netcdf'"
-    export ZSTANDARD_LEVEL=0
-
+    export WRITE_GROUP=1
+    export WRTTASK_PER_GROUP=2
 }
 
 export_gfs_physics ()

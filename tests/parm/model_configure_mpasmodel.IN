@@ -11,10 +11,10 @@ dt_atmos:                1800
 restart_interval:        0
 restart_fh:
 
-quilting:                .false.
+quilting:                @[QUILTING]
 quilting_restart:        .false.
-write_groups:            1
-write_tasks_per_group:   2
+write_groups:            @[WRITE_GROUP]
+write_tasks_per_group:   @[WRTTASK_PER_GROUP]
 itasks:                  1
 output_history:          .true.
 history_file_on_native_grid: .true.
@@ -24,3 +24,7 @@ filename_base:           'atm' 'sfc'
 output_file:             'netcdf'
 
 output_fh:               3 -1
+
+output_grid:             gaussian_grid
+imo:                     1800
+jmo:                     900
