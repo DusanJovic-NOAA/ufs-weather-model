@@ -634,6 +634,7 @@ export_mpasmodel ()
     export UFS_CONFIGURE=ufs.configure.atm.IN
     export MODEL_CONFIGURE=mpasatm_configure.IN
     export atm_model=mpas
+    export ESMF_THREADING=false
 
     export MPAS=false
     export FV3=false

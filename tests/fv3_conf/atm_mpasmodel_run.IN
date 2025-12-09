@@ -1,3 +1,3 @@
 # MPASMODEL input data
 
-cp  @[INPUTDATA_ROOT]/MPASMODEL/atm_mpasmodel/* .
+cp  @[INPUTDATA_ROOT]/MPASMODEL/@[MPASMODEL_DIR]/* .
