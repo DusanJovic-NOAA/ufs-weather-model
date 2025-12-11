@@ -368,6 +368,12 @@ if [[ ${FIRE_BEHAVIOR} = 'true' ]]; then
   atparse < "${PATHRT}/parm/${FIRE_NML:-namelist.fire.IN}" > namelist.fire
 fi
 
+if [[ ${atm_model} = 'mpasmodel' ]]; then
+  atparse < "${PATHRT}/parm/mpasmodel/namelist.atmosphere.IN" > namelist.atmosphere
+  atparse < "${PATHRT}/parm/mpasmodel/streams.atmosphere.IN" > streams.atmosphere
+  cp ${PATHRT}/parm/mpasmodel/stream_list.atmosphere.* .
+fi
+
 #Namelists generated and variable definitions are finalized
 #Sanity check for timesteps on ATM/OCN/ICE
 if [[ -n "${DT_CICE+x}" ]]; then

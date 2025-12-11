@@ -6,7 +6,7 @@
 
 export TEST_DESCR="Build UWM with MPASMODEL"
 
-export CNTL_DIR=atm_mpasmodel
+export CNTL_DIR=atm_mpasmodel_debug
 
 export LIST_FILES="history.2025-11-20_00.00.00.nc \
                    history.2025-11-20_18.00.00.nc \
@@ -34,5 +34,4 @@ export MPASMODEL_DIR=atm_mpasmodel
 export INPUTDATA_ROOT=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
 
 export MGRID=x1.10242
-
 export nccmp_exclude_attr="--globalex=git_version,file_id"

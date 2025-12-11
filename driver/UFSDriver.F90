@@ -363,7 +363,7 @@
 
           found_comp = .false.
 #ifdef FRONT_UFSATM
-          if (trim(model) == "mpas" .or. trim(model) == "fv3") then
+          if (trim(model) == "mpas" .or. trim(model) == "mpasmodel" .or. trim(model) == "fv3") then
             call NUOPC_DriverAddComp(driver, trim(prefix), UFSATM_SS, &
               info=info, petList=petList, comp=comp, rc=rc)
             if (ChkErr(rc,__LINE__,u_FILE_u)) return

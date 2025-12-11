@@ -6,19 +6,17 @@
 
 export TEST_DESCR="Build UWM with MPASMODEL conus"
 
-export CNTL_DIR=atm_mpasmodel_conus
+export CNTL_DIR=atm_mpasmodel_conus_debug
 
 export LIST_FILES="history.2025-11-20_00.00.00.nc \
-                   history.2025-11-20_18.00.00.nc \
-                   history.2025-11-21_00.00.00.nc \
-                   restart.2025-11-20_12.00.00.nc \
-                   restart.2025-11-21_00.00.00.nc"
+                   history.2025-11-20_12.00.00.nc \
+                   restart.2025-11-20_12.00.00.nc"
 
 export_mpasmodel
 
 export ATM_compute_tasks=24
 export DT_ATMOS=180
-export FHMAX=24
+export FHMAX=12
 export APPLY_LBCS=true
 
 export OUTPUT_FH=3

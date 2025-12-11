@@ -1,3 +1,8 @@
 # MPASMODEL input data
 
-cp  @[INPUTDATA_ROOT]/MPASMODEL/@[MPASMODEL_DIR]/* .
+cp @[INPUTDATA_ROOT]/MPASMODEL/fix/* .
+cp @[INPUTDATA_ROOT]/MPASMODEL/@[MPASMODEL_DIR]/@[MGRID].* .
+
+if [[ ${APPLY_LBCS} == 'true' ]]; then
+  cp @[INPUTDATA_ROOT]/MPASMODEL/@[MPASMODEL_DIR]/lbc.*.nc .
+fi

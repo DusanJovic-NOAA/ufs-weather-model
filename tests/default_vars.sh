@@ -633,7 +633,7 @@ export_mpasmodel ()
     # ufs.configure defaults
     export UFS_CONFIGURE=ufs.configure.atm.IN
     export MODEL_CONFIGURE=mpasatm_configure.IN
-    export atm_model=mpas
+    export atm_model=mpasmodel
     export ESMF_THREADING=false
 
     export MPAS=false
@@ -658,6 +658,7 @@ export_mpasmodel ()
     #Set defaults if ATMRES and DT_ATMOS are not set
     export ATMRES=${ATMRES:-"C96"}
     export DT_ATMOS=${DT_ATMOS:-"1800"}
+    export FHMAX=24
 
     export CPLWAV=.false.
     export CPLCHM=.false.
