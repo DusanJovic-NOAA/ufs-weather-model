@@ -372,6 +372,7 @@ if [[ ${atm_model} = 'mpasmodel' ]]; then
   atparse < "${PATHRT}/parm/mpasmodel/namelist.atmosphere.IN" > namelist.atmosphere
   atparse < "${PATHRT}/parm/mpasmodel/streams.atmosphere.IN" > streams.atmosphere
   cp ${PATHRT}/parm/mpasmodel/stream_list.atmosphere.* .
+  cp ${PATHRT}/parm/mpasmodel/ufs_mpasmodel_wgc_history_list .
 fi
 
 #Namelists generated and variable definitions are finalized
