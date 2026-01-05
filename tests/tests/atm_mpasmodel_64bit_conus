@@ -1,0 +1,69 @@
+###############################################################################
+#
+# ATM test with MPASMODEL.
+#
+###############################################################################
+
+export TEST_DESCR="Build UWM with MPASMODEL 64bit conus"
+
+export CNTL_DIR=atm_mpasmodel_64bit_conus
+
+# skip history.2025-11-20_00.00.00.nc. two vars (depv_dt_fric and depv_dt_fric_pv) non-reproducible
+export LIST_FILES=" \
+                   history.2025-11-20_18.00.00.nc \
+                   history.2025-11-21_00.00.00.nc \
+                   restart.2025-11-20_12.00.00.nc \
+                   restart.2025-11-21_00.00.00.nc"
+
+export_mpasmodel
+
+export ATM_compute_tasks=24
+export DT_ATMOS=180
+export FHMAX=24
+export APPLY_LBCS=true
+
+export OUTPUT_FH=3
+export RESTART_FH=12
+export LBC_FH=3
+
+export QUILTING=.true.
+export WRITE_GROUP=1
+export WRTTASK_PER_GROUP=4
+
+export OUTPUT_GRID=" 'lambert_conformal'
+cen_lon:  -97.5
+cen_lat:  38.5
+stdlat1:  38.5
+stdlat2:  38.5
+nx:       2470
+ny:       1350
+lon1:     -130
+lat1:     16
+dx:       3000.0
+dy:       3000.0"
+
+# export OUTPUT_GRID=" 'regional_latlon'
+# lon1: -135.0
+# lat1: 15.0
+# lon2: -60.0
+# lat2: 60.0
+# dlon: 0.025
+# dlat: 0.025"
+
+# export OUTPUT_GRID=" 'rotated_latlon'
+# cen_lon: -97.5
+# cen_lat: 38.5
+# lon1: -35.0
+# lat1: -20.0
+# lon2: 35.0
+# lat2: 20.0
+# dlon: 0.025
+# dlat: 0.025"
+
+export FV3_RUN=atm_mpasmodel_run.IN
+export MPASMODEL_DIR=atm_mpasmodel_conus
+export MODEL_CONFIGURE=model_configure_mpasmodel.IN
+export INPUTDATA_ROOT=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
+
+export MGRID=conus
+export nccmp_exclude_attr="--globalex=git_version,file_id"
