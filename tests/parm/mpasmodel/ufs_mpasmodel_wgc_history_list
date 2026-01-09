@@ -1,5 +1,4 @@
 scalars                 bilinear
-u                       bilinear
 w                       bilinear
 pressure                bilinear
 surface_pressure        bilinear

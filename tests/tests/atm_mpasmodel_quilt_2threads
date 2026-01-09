@@ -4,9 +4,9 @@
 #
 ###############################################################################
 
-export TEST_DESCR="Build UWM with MPASMODEL 64bit"
+export TEST_DESCR="Build UWM with MPASMODEL"
 
-export CNTL_DIR=atm_mpasmodel_64bit
+export CNTL_DIR=atm_mpasmodel
 
 export LIST_FILES="history.2025-11-20_00.00.00.nc \
                    history.2025-11-20_18.00.00.nc \
@@ -19,6 +19,9 @@ export LIST_FILES="history.2025-11-20_00.00.00.nc \
 export_mpasmodel
 
 export ATM_compute_tasks=12
+export THRD=2
+export atm_omp_num_threads=2
+export ESMF_THREADING=true
 export DT_ATMOS=600
 export FHMAX=24
 export APPLY_LBCS=false
