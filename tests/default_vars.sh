@@ -642,6 +642,15 @@ export_mpasmodel ()
     export atm_model=mpasmodel
     export ESMF_THREADING=false
 
+    if [[ ${MACHINE_ID} = wcoss2 ]]; then
+        export INPUTDATA_ROOT=/lfs/h2/emc/eib/noscrub/dusan.jovic/ufs/INPUTDATA_ROOT
+    elif [[ ${MACHINE_ID} = ursa ]]; then
+        export INPUTDATA_ROOT=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
+    else
+        echo "Unsupported machine for mpasmodel"
+        exit 1
+    fi
+
     export MPAS=false
     export FV3=false
     export S2S=false

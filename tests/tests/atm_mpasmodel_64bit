@@ -32,7 +32,6 @@ export OUTPUT_GRID="not-used"
 export FV3_RUN=atm_mpasmodel_run.IN
 export MODEL_CONFIGURE=model_configure_mpasmodel.IN
 export MPASMODEL_DIR=atm_mpasmodel
-export INPUTDATA_ROOT=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
 
 export MGRID=x1.10242
 
