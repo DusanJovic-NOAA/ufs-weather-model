@@ -8,8 +8,7 @@ export TEST_DESCR="Build UWM with MPASMODEL 64bit"
 
 export CNTL_DIR=atm_mpasmodel_64bit
 
-# skip history.2025-11-20_00.00.00.nc. two vars (depv_dt_fric and depv_dt_fric_pv) non-reproducible
-export LIST_FILES=" \
+export LIST_FILES="history.2025-11-20_00.00.00.nc \
                    history.2025-11-20_18.00.00.nc \
                    history.2025-11-21_00.00.00.nc \
                    restart.2025-11-20_12.00.00.nc \
@@ -36,3 +35,4 @@ export MPASMODEL_DIR=atm_mpasmodel
 export MGRID=x1.10242
 
 export nccmp_exclude_attr="--globalex=git_version,file_id"
+export nccmp_exclude='--exclude=depv_dt_fric,depv_dt_fric_pv'
