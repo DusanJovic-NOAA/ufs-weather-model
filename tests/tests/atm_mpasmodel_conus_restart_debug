@@ -6,26 +6,24 @@
 
 export TEST_DESCR="Build UWM with MPASMODEL conus"
 
-export CNTL_DIR=atm_mpasmodel_conus
+export CNTL_DIR=atm_mpasmodel_conus_debug
 
-export LIST_FILES="history.2025-11-20_00.00.00.nc \
-                   history.2025-11-20_18.00.00.nc \
-                   history.2025-11-21_00.00.00.nc \
+export LIST_FILES="history.2025-11-20_12.00.00.nc \
                    restart.2025-11-20_12.00.00.nc \
-                   restart.2025-11-21_00.00.00.nc \
-                   atmf018.nc \
-                   atmf024.nc"
+                   atmf012.nc"
 
 export_mpasmodel
 
 export ATM_compute_tasks=48
 export DT_ATMOS=180
-export FHMAX=24
+export FHMAX=12
 export APPLY_LBCS=true
 
-export OUTPUT_FH=6
-export RESTART_FH=12
+export OUTPUT_FH=3
+export RESTART_FH=6
 export LBC_FH=3
+export FHROT=6
+export CONFIG_DO_RESTART=true
 
 export QUILTING=.true.
 export WRITE_GROUP=1
@@ -67,4 +65,4 @@ export MPASMODEL_DIR=atm_mpasmodel_conus
 
 export MGRID=conus
 
-export nccmp_exclude_attr="--globalex=git_version,file_id"
+export nccmp_exclude_attr="--globalex=git_version,file_id,parent_id,config_start_time,config_do_restart"

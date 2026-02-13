@@ -6,3 +6,12 @@ cp @[INPUTDATA_ROOT]/MPASMODEL/@[MPASMODEL_DIR]/@[MGRID].* .
 if [[ ${APPLY_LBCS} == 'true' ]]; then
   cp @[INPUTDATA_ROOT]/MPASMODEL/@[MPASMODEL_DIR]/lbc.*.nc .
 fi
+
+SUFFIX=${RT_SUFFIX}
+
+if [[ ${FHROT} -gt 0 ]]; then
+  START_TIME="$(printf "%04d-%02d-%02d %02d:00:00" ${SYEAR} ${SMONTH} ${SDAY} ${SHOUR})"
+  CONFIG_START_TIME=$(date -d "${START_TIME} ${FHROT} hours" +"%Y-%m-%d_%H.%M.%S")
+  cp ../${DEP_RUN}${SUFFIX}/restart.${CONFIG_START_TIME}.nc .
+  CONFIG_START_TIME=$(date -d "${START_TIME} ${FHROT} hours" +"%Y-%m-%d_%H:%M:%S")
+fi

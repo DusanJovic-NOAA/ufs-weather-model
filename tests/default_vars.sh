@@ -685,6 +685,14 @@ export_mpasmodel ()
     export QUILTING_RESTART=.false.
     export WRITE_GROUP=1
     export WRTTASK_PER_GROUP=2
+
+    export SYEAR=2025
+    export SMONTH=11
+    export SDAY=20
+    export SHOUR=00
+    export CONFIG_START_TIME="$(printf "%04d-%02d-%02d_%02d:00:00" ${SYEAR} ${SMONTH} ${SDAY} ${SHOUR})"
+    export FHROT=0
+    export CONFIG_DO_RESTART='false'
 }
 
 export_gfs_physics ()

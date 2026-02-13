@@ -5,7 +5,7 @@ start_hour:              0
 start_minute:            0
 start_second:            0
 nhours_fcst:             @[FHMAX]
-fhrot:                   0
+fhrot:                   @[FHROT]
 
 dt_atmos:                @[DT_ATMOS]
 restart_interval:        6 -1

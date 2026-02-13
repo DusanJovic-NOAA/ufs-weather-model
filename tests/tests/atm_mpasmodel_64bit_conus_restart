@@ -4,14 +4,12 @@
 #
 ###############################################################################
 
-export TEST_DESCR="Build UWM with MPASMODEL conus"
+export TEST_DESCR="Build UWM with MPASMODEL 64bit conus"
 
-export CNTL_DIR=atm_mpasmodel_conus
+export CNTL_DIR=atm_mpasmodel_64bit_conus
 
-export LIST_FILES="history.2025-11-20_00.00.00.nc \
-                   history.2025-11-20_18.00.00.nc \
+export LIST_FILES="history.2025-11-20_18.00.00.nc \
                    history.2025-11-21_00.00.00.nc \
-                   restart.2025-11-20_12.00.00.nc \
                    restart.2025-11-21_00.00.00.nc \
                    atmf018.nc \
                    atmf024.nc"
@@ -26,6 +24,8 @@ export APPLY_LBCS=true
 export OUTPUT_FH=6
 export RESTART_FH=12
 export LBC_FH=3
+export FHROT=12
+export CONFIG_DO_RESTART=true
 
 export QUILTING=.true.
 export WRITE_GROUP=1
@@ -67,4 +67,5 @@ export MPASMODEL_DIR=atm_mpasmodel_conus
 
 export MGRID=conus
 
-export nccmp_exclude_attr="--globalex=git_version,file_id"
+export nccmp_exclude_attr="--globalex=git_version,file_id,parent_id,config_start_time,config_do_restart"
+export nccmp_exclude='--exclude=depv_dt_fric,depv_dt_fric_pv'
