@@ -648,6 +648,8 @@ export_mpasmodel ()
         export INPUTDATA_ROOT=/lfs/h2/emc/eib/noscrub/dusan.jovic/ufs/INPUTDATA_ROOT
     elif [[ ${MACHINE_ID} = ursa ]]; then
         export INPUTDATA_ROOT=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
+    elif [[ ${MACHINE_ID} = hercules ]]; then
+        export INPUTDATA_ROOT=/work/noaa/fv3-cam/djovic/ufs/INPUTDATA_ROOT
     elif [[ ${MACHINE_ID} = gaeac6 ]]; then
         export INPUTDATA_ROOT=/gpfs/f6/drsa-hurr1/scratch/Dusan.Jovic/ufs/INPUTDATA_ROOT
     else
