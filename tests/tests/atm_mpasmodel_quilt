@@ -28,7 +28,8 @@ export RESTART_FH=12
 export LBC_FH=24
 
 export QUILTING=.true.
-export WRITE_GROUP=1
+export QUILTING_RESTART=.true.
+export WRITE_GROUP=4
 export WRTTASK_PER_GROUP=2
 export OUTPUT_GRID="'global_latlon'
 imo:  720

@@ -12,6 +12,7 @@ SUFFIX=${RT_SUFFIX}
 if [[ ${FHROT} -gt 0 ]]; then
   START_TIME="$(printf "%04d-%02d-%02d %02d:00:00" ${SYEAR} ${SMONTH} ${SDAY} ${SHOUR})"
   CONFIG_START_TIME=$(date -d "${START_TIME} ${FHROT} hours" +"%Y-%m-%d_%H.%M.%S")
-  cp ../${DEP_RUN}${SUFFIX}/restart.${CONFIG_START_TIME}.nc .
+  # cp ../${DEP_RUN}${SUFFIX}/restart.${CONFIG_START_TIME}.nc .
+  cp ../${DEP_RUN}${SUFFIX}/restart_wgc.${CONFIG_START_TIME}.nc restart.${CONFIG_START_TIME}.nc
   CONFIG_START_TIME=$(date -d "${START_TIME} ${FHROT} hours" +"%Y-%m-%d_%H:%M:%S")
 fi

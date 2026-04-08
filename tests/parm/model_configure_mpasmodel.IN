@@ -12,7 +12,7 @@ restart_interval:        6 -1
 restart_fh:
 
 quilting:                @[QUILTING]
-quilting_restart:        .false.
+quilting_restart:        @[QUILTING_RESTART]
 write_groups:            @[WRITE_GROUP]
 write_tasks_per_group:   @[WRTTASK_PER_GROUP]
 itasks:                  1

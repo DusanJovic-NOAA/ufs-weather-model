@@ -28,6 +28,7 @@ export RESTART_FH=12
 export LBC_FH=3
 
 export QUILTING=.true.
+export QUILTING_RESTART=.true.
 export WRITE_GROUP=1
 export WRTTASK_PER_GROUP=4
 
