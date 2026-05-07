@@ -26,7 +26,6 @@ export RESTART_FH=12
 export LBC_FH=24
 
 export QUILTING=.false.
-export OUTPUT_GRID="not-used"
 
 export FV3_RUN=atm_mpasmodel_run.IN
 export MODEL_CONFIGURE=model_configure_mpasmodel.IN

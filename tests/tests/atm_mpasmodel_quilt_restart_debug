@@ -10,7 +10,11 @@ export CNTL_DIR=atm_mpasmodel_debug
 
 export LIST_FILES="history.2025-11-20_12.00.00.nc \
                    restart.2025-11-20_12.00.00.nc \
+                   diagf012.nc \
                    atmf012.nc "
+
+export RUNDIR_CMP_FILES="history.2025-11-20_12.00.00.nc/history_wgc.2025-11-20_12.00.00.nc \
+                         restart.2025-11-20_12.00.00.nc/restart_wgc.2025-11-20_12.00.00.nc"
 
 export_mpasmodel
 
@@ -28,9 +32,8 @@ export CONFIG_DO_RESTART=true
 export QUILTING=.true.
 export WRITE_GROUP=1
 export WRTTASK_PER_GROUP=2
-export OUTPUT_GRID="'global_latlon'
-imo:  720
-jmo:  361"
+export HISTORY_GRID_SPEC='global_0p5_deg'
+export DIAG_GRID_SPEC='conus_30km_lcc'
 
 export FV3_RUN=atm_mpasmodel_run.IN
 export MODEL_CONFIGURE=model_configure_mpasmodel.IN

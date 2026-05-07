@@ -631,12 +631,15 @@ export_mpasmodel ()
     export CPLCHM=.false.
     export CPLWAV2ATM=.false.
 
-    # DJS2025: This is needed by rt_utils.sh, but not applicable to MPAS forecasts yet...
     export NTILES=1
     export QUILTING=.false.
     export QUILTING_RESTART=.false.
     export WRITE_GROUP=1
     export WRTTASK_PER_GROUP=2
+    export WRTTASK_PER_GROUP=2
+    export OUTPUT_GRID=''
+    export HISTORY_GRID_SPEC='not-used'
+    export DIAG_GRID_SPEC='not-used'
 
     export SYEAR=2025
     export SMONTH=11

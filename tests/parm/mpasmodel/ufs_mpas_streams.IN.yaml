@@ -1,0 +1,46 @@
+output_grid_specs:
+  - name: 'global_0p5_deg'
+    grid_spec: &global_0p5_deg
+      projection: 'global_latlon'
+      imo: 720
+      jmo: 361
+  - name: 'conus_30km_lcc'
+    grid_spec: &conus_30km_lcc
+      projection: 'lambert_conformal'
+      cen_lon: -97.5
+      cen_lat: 38.5
+      stdlat1: 38.5
+      stdlat2: 38.5
+      lon1: -130.0
+      lat1: 16.0
+      dx: 30000.0
+      dy: 30000.0
+      nx: 247
+      ny: 135
+
+streams:
+  - name: 'atm'
+    grid_type: 'regridded'
+    grid_spec: *@[HISTORY_GRID_SPEC]
+    list_of_vars_fname: 'history_vars.list'
+    output_fh: [ 0.0, 1.0, 2.5, 3.0, 6.0, 12.0, 24 ]
+
+  - name: 'diag'
+    grid_type: 'regridded'
+    grid_spec: *@[DIAG_GRID_SPEC]
+    list_of_vars_fname: 'diagnostics_vars.list'
+    output_fh: [ 0, 1, 2.5, 3, 6, 12, 24 ]
+
+  - name: 'history_wgc'
+    grid_type: 'mpas_mesh'
+    mpas_stream: 'output'
+    output_fh: []
+
+  - name: 'diag_wgc'
+    grid_type: 'mpas_mesh'
+    mpas_stream: 'diagnostics'
+    output_fh: []
+
+  - name: 'restart'
+    grid_type: 'mpas_mesh'
+    output_fh: [ 3, -1 ]

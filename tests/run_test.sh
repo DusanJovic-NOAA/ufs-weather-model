@@ -371,7 +371,8 @@ if [[ ${atm_model} = 'mpasmodel' ]]; then
   atparse < "${PATHRT}/parm/mpasmodel/namelist.atmosphere.IN" > namelist.atmosphere
   atparse < "${PATHRT}/parm/mpasmodel/streams.atmosphere.IN" > streams.atmosphere
   cp "${PATHRT}"/parm/mpasmodel/stream_list.atmosphere.* .
-  cp "${PATHRT}"/parm/mpasmodel/ufs_mpasmodel_wgc_history_list .
+  atparse < "${PATHRT}/parm/mpasmodel/ufs_mpas_streams.IN.yaml" > ufs_mpas_streams.yaml
+  cp "${PATHRT}"/parm/mpasmodel/*_vars.list .
 fi
 
 #Namelists generated and variable definitions are finalized
@@ -531,6 +532,69 @@ if [[ ${skip_check_results} == false ]]; then
           printf "USING CMP.." >> "${RT_LOG}"
           printf "USING CMP.."
           cmp "${RTPWD}/${CNTL_DIR}_${RT_COMPILER}/${i}" "${RUNDIR}/${i}" >/dev/null 2>&1 && d=$? || d=$?
+          if [[ ${d} -eq 2 ]]; then
+            printf "....ERROR" >> "${RT_LOG}"
+            printf "....ERROR"
+            test_status='FAIL'
+          fi
+
+        fi
+
+        if [[ ${d} -ne 0 ]]; then
+          echo "....NOT IDENTICAL" >> "${RT_LOG}"
+          echo "....NOT IDENTICAL"
+          test_status='FAIL'
+        else
+          echo "....OK" >> "${RT_LOG}"
+          echo "....OK"
+        fi
+
+      fi
+
+    done
+
+    # Compare rundir local files
+    for k in ${RUNDIR_CMP_FILES:-} ; do
+
+      IFS='/' read -ra files <<< "${k}"
+      f1=${files[0]}
+      f2=${files[1]}
+
+      printf %s " Comparing ${f1} <=> ${f2} ....." >> "${RT_LOG}"
+      printf %s " Comparing ${f1} <=> ${f2} ....."
+
+      if [[ ! -f ${RUNDIR}/${f1} ]] ; then
+
+        echo ".......MISSING f1 ${f1}" >> "${RT_LOG}"
+        echo ".......MISSING f1 ${f1}"
+        test_status='FAIL'
+
+      elif [[ ! -f ${RUNDIR}/${f2} ]] ; then
+
+        echo ".......MISSING f2 ${f2}" >> "${RT_LOG}"
+        echo ".......MISSING f2 ${f2}"
+        test_status='FAIL'
+
+      else
+        if [[ ${f1##*.} == nc* ]] && [[ ${f2##*.} == nc* ]]; then
+          if [[ " orion hercules hera ursa wcoss2 acorn derecho gaeac5 gaeac6 noaacloud " =~ ${MACHINE_ID} ]]; then
+            printf "USING NCCMP.." >> "${RT_LOG}"
+            printf "USING NCCMP.."
+              nccmp_args=(-d -S -q -f -B --Attribute=checksum --warn=format)
+              if [[ ${CMP_DATAONLY} == false ]]; then nccmp_args+=("-g"); fi
+              if [[ -n "${nccmp_exclude// }" ]]; then nccmp_args+=("${nccmp_exclude}"); fi
+              if [[ -n "${nccmp_exclude_attr// }" ]]; then nccmp_args+=("${nccmp_exclude_attr}"); fi
+              nccmp "${nccmp_args[@]}" "${RUNDIR}/${f1}" "${RUNDIR}/${f2}" > "${f1}_local_nccmp.log" 2>&1 && d=$? || d=$?
+              if [[ ${d} -ne 0 && ${d} -ne 1 ]]; then
+                printf "....ERROR" >> "${RT_LOG}"
+                printf "....ERROR"
+                test_status='FAIL'
+              fi
+          fi
+        else
+          printf "USING CMP.." >> "${RT_LOG}"
+          printf "USING CMP.."
+          cmp "${RUNDIR}/${f1}" "${RUNDIR}/${f2}" >/dev/null 2>&1 && d=$? || d=$?
           if [[ ${d} -eq 2 ]]; then
             printf "....ERROR" >> "${RT_LOG}"
             printf "....ERROR"

@@ -10,7 +10,11 @@ export CNTL_DIR=atm_mpasmodel_conus_debug
 
 export LIST_FILES="history.2025-11-20_12.00.00.nc \
                    restart.2025-11-20_12.00.00.nc \
+                   diagf012.nc \
                    atmf012.nc"
+
+export RUNDIR_CMP_FILES="history.2025-11-20_12.00.00.nc/history_wgc.2025-11-20_12.00.00.nc \
+                         restart.2025-11-20_12.00.00.nc/restart_wgc.2025-11-20_12.00.00.nc"
 
 export_mpasmodel
 
@@ -28,36 +32,8 @@ export CONFIG_DO_RESTART=true
 export QUILTING=.true.
 export WRITE_GROUP=1
 export WRTTASK_PER_GROUP=4
-
-export OUTPUT_GRID=" 'lambert_conformal'
-cen_lon:  -97.5
-cen_lat:  38.5
-stdlat1:  38.5
-stdlat2:  38.5
-nx:       2470
-ny:       1350
-lon1:     -130
-lat1:     16
-dx:       3000.0
-dy:       3000.0"
-
-# export OUTPUT_GRID=" 'regional_latlon'
-# lon1: -135.0
-# lat1: 15.0
-# lon2: -60.0
-# lat2: 60.0
-# dlon: 0.025
-# dlat: 0.025"
-
-# export OUTPUT_GRID=" 'rotated_latlon'
-# cen_lon: -97.5
-# cen_lat: 38.5
-# lon1: -35.0
-# lat1: -20.0
-# lon2: 35.0
-# lat2: 20.0
-# dlon: 0.025
-# dlat: 0.025"
+export HISTORY_GRID_SPEC='conus_30km_lcc'
+export DIAG_GRID_SPEC='conus_30km_lcc'
 
 export FV3_RUN=atm_mpasmodel_run.IN
 export MODEL_CONFIGURE=model_configure_mpasmodel.IN
