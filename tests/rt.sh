@@ -1224,7 +1224,7 @@ while read -r line || [[ -n "${line}" ]]; do
 EOF
     fi
 
-    ( 
+    (
       # shellcheck source=/github/workspace/tests/tests/control_c48
       source "${PATHRT}/tests/${TEST_NAME}"
 
@@ -1254,6 +1254,7 @@ export INPUTDATA_ROOT=${INPUTDATA_ROOT}
 export INPUTDATA_ROOT_WW3=${INPUTDATA_ROOT_WW3}
 export INPUTDATA_LM4=${INPUTDATA_LM4}
 export INPUTDATA_GFSv17opn=${INPUTDATA_GFSv17opn}
+export INPUTDATA_ROOT_MPAS=${INPUTDATA_ROOT_MPAS}
 export PATHRT=${PATHRT}
 export PATHTR=${PATHTR}
 export NEW_BASELINE=${NEW_BASELINE}

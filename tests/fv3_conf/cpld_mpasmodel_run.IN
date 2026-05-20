@@ -1,0 +1,42 @@
+mkdir INPUT RESTART
+
+mkdir -p $CICE_RESTART_DIR
+mkdir -p $MOM6_RESTART_DIR
+mkdir -p $CMEPS_RESTART_DIR
+
+mkdir -p $CICE_HISTORY_DIR
+mkdir -p $MOM6_OUTPUT_DIR
+
+# MPASMODEL input data
+cp @[INPUTDATA_ROOT_MPAS]/MPASMODEL/fix/* .
+cp @[INPUTDATA_ROOT_MPAS]/MPASMODEL/@[MPASMODEL_DIR]/@[MGRID].* .
+
+if [[ ${APPLY_LBCS} == 'true' ]]; then
+  cp @[INPUTDATA_ROOT_MPAS]/MPASMODEL/@[MPASMODEL_DIR]/lbc.*.nc .
+fi
+
+SUFFIX=${RT_SUFFIX}
+
+if [[ ${FHROT} -gt 0 ]]; then
+  START_TIME="$(printf "%04d-%02d-%02d %02d:00:00" ${SYEAR} ${SMONTH} ${SDAY} ${SHOUR})"
+  CONFIG_START_TIME=$(date -d "${START_TIME} ${FHROT} hours" +"%Y-%m-%d_%H.%M.%S")
+  # cp ../${DEP_RUN}${SUFFIX}/restart.${CONFIG_START_TIME}.nc .
+  cp ../${DEP_RUN}${SUFFIX}/restart_wgc.${CONFIG_START_TIME}.nc restart.${CONFIG_START_TIME}.nc
+  CONFIG_START_TIME=$(date -d "${START_TIME} ${FHROT} hours" +"%Y-%m-%d_%H:%M:%S")
+fi
+
+MOM_IC=@[INPUTDATA_ROOT]/MOM6_IC
+ICE_IC=@[INPUTDATA_ROOT]/CICE_IC
+ICERES=${OCNRES:0:1}.${OCNRES:1}
+
+# MOM6 fixed input
+cp @[INPUTDATA_ROOT]/MOM6_FIX/@[OCNRES]/* ./INPUT
+
+# CICE fixed input
+cp @[INPUTDATA_ROOT]/CICE_FIX/@[OCNRES]/grid_cice_NEMS_mx@[OCNRES].nc .
+cp @[INPUTDATA_ROOT]/CICE_FIX/@[OCNRES]/kmtu_cice_NEMS_mx@[OCNRES].nc .
+cp @[INPUTDATA_ROOT]/CICE_FIX/@[OCNRES]/mesh.mx@[OCNRES].nc .
+
+# MOM6 and CICE IC; hardwire avail ics for now
+cp ${MOM_IC}/100/2011100100/MOM6_IC_TS_2011100100.nc ./INPUT/MOM6_IC_TS.nc
+cp ${ICE_IC}/100/cice_model_@[ICERES].cpc.res_2011100100.nc ./cice_model.res.nc

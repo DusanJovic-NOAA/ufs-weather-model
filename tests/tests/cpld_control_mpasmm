@@ -1,0 +1,67 @@
+#
+#
+#
+export TEST_DESCR="One-way coupled MPASMODEL-MOM6-CICE-CMEPS system"
+
+export CNTL_DIR=cpld_control_mpasmm
+
+export LIST_FILES="history.2025-11-20_00.00.00.nc \
+                   history.2025-11-20_18.00.00.nc \
+                   history.2025-11-21_00.00.00.nc \
+                   restart.2025-11-20_12.00.00.nc \
+                   restart.2025-11-21_00.00.00.nc \
+                   RESTART/20251121.000000.MOM.res.nc \
+                   RESTART/iced.2025-11-21-00000.nc \
+                   RESTART/ufs.cpld.cpl.r.2025-11-21-00000.nc"
+
+export_mpasmodel
+export S2S=true
+
+export MGRID=x1.40962
+export OCNRES=100
+export ICERES=1.00
+export NX_GLB=360
+export NY_GLB=320
+export ICE_tasks=10
+export OCN_tasks=20
+export WW3_DOMAIN=' '
+
+export_mom6
+export_cice6
+export_cmeps
+
+export ATM_compute_tasks=96
+
+export APPLY_LBCS=false
+export LBC_FH=24
+
+export QUILTING=.true.
+export QUILTING_RESTART=.true.
+export WRITE_GROUP=4
+export WRTTASK_PER_GROUP=2
+export HISTORY_GRID_SPEC='global_0p5_deg'
+export DIAG_GRID_SPEC='conus_30km_lcc'
+
+export DT_ATMOS=600
+export DT_CICE=${DT_ATMOS}
+export coupling_interval_slow_sec=${DT_THERM_MOM6}
+export coupling_interval_fast_sec=${DT_ATMOS}
+export RESTART_N=12
+export RESTART_N_SEC=$((RESTART_N*3600))
+export RESTART_INTERVAL="${RESTART_N} -1"
+
+export CHOUR=0
+export OUTPUT_FH=6
+export RESTART_FH=12
+
+export CPLMODE=ufs.frac.aoflux
+export MOM6_USE_WAVES=False
+export MOM6_TOPOEDITS=ufs.topo_edits_011818.nc
+export MOM6_ALLOW_LANDMASK_CHANGES=True
+export eps_imesh=2.5e-1
+
+export MPASMODEL_DIR=atm_mpasmodel_40962
+export MODEL_CONFIGURE=model_configure_mpasmodel.IN
+export UFS_CONFIGURE=ufs.configure.s2smm.IN
+export INPUT_NML=input.mom6.nml.IN
+export FV3_RUN=cpld_mpasmodel_run.IN
