@@ -591,13 +591,15 @@ export_mpasmodel ()
     export ESMF_THREADING=false
 
     if [[ ${MACHINE_ID} = wcoss2 ]]; then
-        export INPUTDATA_ROOT=/lfs/h2/emc/eib/noscrub/dusan.jovic/ufs/INPUTDATA_ROOT
+        export INPUTDATA_ROOT_MPAS=/lfs/h2/emc/eib/noscrub/dusan.jovic/ufs/INPUTDATA_ROOT
     elif [[ ${MACHINE_ID} = ursa ]]; then
-        export INPUTDATA_ROOT=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
+        export INPUTDATA_ROOT_MPAS=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
     elif [[ ${MACHINE_ID} = hercules ]]; then
-        export INPUTDATA_ROOT=/work/noaa/fv3-cam/djovic/ufs/INPUTDATA_ROOT
+        export INPUTDATA_ROOT_MPAS=/work/noaa/fv3-cam/djovic/ufs/INPUTDATA_ROOT
     elif [[ ${MACHINE_ID} = gaeac6 ]]; then
-        export INPUTDATA_ROOT=/gpfs/f6/drsa-hurr1/scratch/Dusan.Jovic/ufs/INPUTDATA_ROOT
+        export INPUTDATA_ROOT_MPAS=/gpfs/f6/drsa-hurr1/scratch/Dusan.Jovic/ufs/INPUTDATA_ROOT
+    elif [[ ${MACHINE_ID} = derecho ]]; then
+        export INPUTDATA_ROOT_MPAS=/glade/derecho/scratch/worthen/INPUTDATA_ROOT
     else
         echo "Unsupported machine for mpasmodel"
         exit 1
@@ -1757,7 +1759,7 @@ export_fire_behavior() {
 export_cmeps() {
   export UFS_CONFIGURE=ufs.configure.s2sw_fast.IN
   export med_model=cmeps
-  export atm_model=fv3
+  export atm_model=${atm_model}
   export ocn_model=mom6
   export ice_model=cice6
   export wav_model=ww3
