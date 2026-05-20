@@ -2,9 +2,7 @@
   path = UFSATM
   #url = https://github.com/NOAA-EMC/ufsatm
   #branch = develop
-  #url = https://github.com/DusanJovic-NOAA/ufsatm
-  #branch = ufs_with_mpasmodel
-  url = https://github.com/DeniseWorthen/ufsatm
+  url = https://github.com/DusanJovic-NOAA/ufsatm
   branch = ufs_with_mpasmodel
 [submodule "WW3"]
   path = WW3
