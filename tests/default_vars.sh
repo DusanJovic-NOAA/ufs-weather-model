@@ -1981,6 +1981,7 @@ export_35d_run ()
 }
 export_datm_cdeps ()
 {
+  export atm_model=datm
   export FV3=false
   export S2S=false
   export HAFS=false
@@ -2042,7 +2043,6 @@ export_datm_cdeps ()
   export MAPUV3D=false
   # default configure
   export UFS_CONFIGURE=ufs.configure.datm_cdeps.IN
-  export atm_model=datm
   export CPLMODE=ufs.frac.aoflux
 
   # datm defaults
