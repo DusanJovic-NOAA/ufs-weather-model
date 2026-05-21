@@ -11,7 +11,7 @@ die() { echo "$@" >&2; exit 1; }
 usage() {
   set +x #No reason to print out a bunch of echo statements here
   echo
-  echo "Usage: $0 -a <account> | -b <file> | -c | -d | -e | -h | -k | -l <file> | -m | -n <name> | -o | -r | -v | -w"
+  echo "Usage: $0 -a <account> | -b <file> | -c | -d | -e | -h | -k | -l <file> | -m | -n <name> | -o | -r | -v | -w | -x"
   echo
   echo "  -a  <account> to use on for HPC queue"
   echo "  -b  create new baselines only for tests listed in <file>"
@@ -27,6 +27,7 @@ usage() {
   echo "  -r  use Rocoto workflow manager"
   echo "  -v  verbose output"
   echo "  -w  for weekly_test, skip comparing baseline results"
+  echo "  -x  dry-run"
   echo
 }
 
@@ -574,6 +575,7 @@ else
   exit 1
 fi
 
+ls -l detect_machine.sh rt_utils.sh
 source detect_machine.sh
 source rt_utils.sh
 # shellcheck disable=SC1091
@@ -596,9 +598,10 @@ RUN_SINGLE_TEST=false
 RTVERBOSE=false
 export RTVERBOSE
 export STOP_ECFLOW_AT_END=false
+export DRY_RUN=false
 ACCNR=${ACCNR:-""}
 
-while getopts ":a:b:cl:mn:dwkreovh" opt; do
+while getopts ":a:b:cl:mn:dwkreovhx" opt; do
   case ${opt} in
     a)
       ACCNR=${OPTARG}
@@ -657,6 +660,9 @@ while getopts ":a:b:cl:mn:dwkreovh" opt; do
       ;;
     v)
       RTVERBOSE=true
+      ;;
+    x)
+      DRY_RUN=true
       ;;
     h)
       usage
@@ -1166,6 +1172,8 @@ while read -r line || [[ -n "${line}" ]]; do
       fi
     fi
 
+    [[ ${DRY_RUN} == true ]] && continue
+
     create_or_run_compile_task
     continue
 
@@ -1273,6 +1281,7 @@ export skip_check_results=${skip_check_results}
 export RTVERBOSE=${RTVERBOSE}
 export delete_rundir=${delete_rundir}
 export WLCLK=${WLCLK}
+export DRY_RUN=${DRY_RUN}
 EOF
 
       if [[ ${ROCOTO} == true ]]; then
@@ -1317,6 +1326,11 @@ if [[ ${CREATE_BASELINE} == true && ${NEW_BASELINES_FILE} != '' ]]; then
     [[ -d "${NEW_BASELINE}/${dir##*/}" ]] && continue
     ln -s "${dir%*/}" "${NEW_BASELINE}/"
   done
+fi
+
+if [[ ${DRY_RUN} == true ]]; then
+  echo "Successful dry run"
+  exit 0
 fi
 
 ## Lets verify all tests were run and that they passed
