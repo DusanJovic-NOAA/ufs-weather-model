@@ -1,6 +1,5 @@
 #
 #
-#
 export TEST_DESCR="One-way coupled MPASMODEL-MOM6-CICE-CMEPS system"
 
 export CNTL_DIR=cpld_control_mpasmm
@@ -65,3 +64,5 @@ export MODEL_CONFIGURE=model_configure_mpasmodel.IN
 export UFS_CONFIGURE=ufs.configure.s2smm.IN
 export INPUT_NML=input.mom6.nml.IN
 export FV3_RUN=cpld_mpasmodel_run.IN
+
+export nccmp_exclude_attr="--globalex=git_version,file_id"
