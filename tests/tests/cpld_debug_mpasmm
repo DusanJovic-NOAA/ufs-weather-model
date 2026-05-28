@@ -1,0 +1,20 @@
+#
+#
+export TEST_DESCR="One-way coupled MPASMODEL-MOM6-CICE-CMEPS system"
+
+source ${PATHRT}/tests/cpld_control_mpasmm
+
+export CNTL_DIR=cpld_debug_mpasmm
+
+export LIST_FILES="history.2025-11-20_00.00.00.nc \
+                   history.2025-11-20_06.00.00.nc \
+                   history.2025-11-20_12.00.00.nc \
+                   restart.2025-11-20_06.00.00.nc \
+                   restart.2025-11-20_12.00.00.nc \
+                   RESTART/20251120.120000.MOM.res.nc \
+                   RESTART/iced.2025-11-20-43200.nc \
+                   RESTART/ufs.cpld.cpl.r.2025-11-20-43200.nc"
+
+export FHMAX=12
+export RESTART_N=6
+export RESTART_FH=6

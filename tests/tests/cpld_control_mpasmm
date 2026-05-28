@@ -1,6 +1,5 @@
 #
 #
-#
 export TEST_DESCR="One-way coupled MPASMODEL-MOM6-CICE-CMEPS system"
 
 export CNTL_DIR=cpld_control_mpasmm
@@ -30,7 +29,7 @@ export_mom6
 export_cice6
 export_cmeps
 
-export ATM_compute_tasks=96
+export ATM_compute_tasks=128
 
 export APPLY_LBCS=false
 export LBC_FH=24
