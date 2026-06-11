@@ -944,6 +944,10 @@ mkdir -p "${STMP}/${USER}"
 
 NEW_BASELINE=${STMP}/${USER}/FV3_RT/REGRESSION_TEST
 
+if [[ ${TESTS_FILE} =~ 'mpasmodel' ]] ; then
+  NEW_BASELINE=${STMP}/${USER}/FV3_RT/REGRESSION_TEST_ufs_with_mpasmodel
+fi
+
 # Overwrite default RUNDIR_ROOT if environment variable RUNDIR_ROOT is set
 RUNDIR_ROOT=${RUNDIR_ROOT:-${PTMP}/${USER}/FV3_RT}/rt_$$
 mkdir -p "${RUNDIR_ROOT}"
