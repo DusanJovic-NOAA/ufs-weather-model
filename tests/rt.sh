@@ -963,6 +963,27 @@ NEW_BASELINE=${STMP}/${USER}/FV3_RT/REGRESSION_TEST
 
 if [[ ${TESTS_FILE} =~ 'mpasmodel' ]] ; then
   NEW_BASELINE=${STMP}/${USER}/FV3_RT/REGRESSION_TEST_ufs_with_mpasmodel
+
+  # more permanent locations for baselines during testing, do not MERGE, temporary. FIXME
+  if [[ ${MACHINE_ID} = wcoss2 ]]; then
+      INPUTDATA_ROOT_MPASMODEL=/lfs/h2/emc/eib/noscrub/dusan.jovic/ufs/INPUTDATA_ROOT
+      NEW_BASELINE=/lfs/h2/emc/eib/noscrub/dusan.jovic/ufs/REGRESSION_TEST_ufs_with_mpasmodel
+  elif [[ ${MACHINE_ID} = ursa ]]; then
+      INPUTDATA_ROOT_MPASMODEL=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/INPUTDATA_ROOT
+      NEW_BASELINE=/scratch3/NCEPDEV/fv3-cam/Dusan.Jovic/ufs/REGRESSION_TEST_ufs_with_mpasmodel
+  elif [[ ${MACHINE_ID} = hercules ]]; then
+      INPUTDATA_ROOT_MPASMODEL=/work/noaa/fv3-cam/djovic/ufs/INPUTDATA_ROOT
+      NEW_BASELINE=/work/noaa/fv3-cam/djovic/ufs/REGRESSION_TEST_ufs_with_mpasmodel
+  elif [[ ${MACHINE_ID} = gaeac6 ]]; then
+      INPUTDATA_ROOT_MPASMODEL=/gpfs/f6/drsa-hurr1/scratch/Dusan.Jovic/ufs/INPUTDATA_ROOT
+      NEW_BASELINE=/gpfs/f6/drsa-hurr1/scratch/Dusan.Jovic/ufs/REGRESSION_TEST_ufs_with_mpasmodel
+  elif [[ ${MACHINE_ID} = derecho ]]; then
+      INPUTDATA_ROOT_MPASMODEL=/glade/derecho/scratch/worthen/INPUTDATA_ROOT
+  else
+      echo "Unsupported machine for mpasmodel"
+      exit 1
+  fi
+
 fi
 
 # Overwrite default RUNDIR_ROOT if environment variable RUNDIR_ROOT is set
