@@ -36,6 +36,7 @@
 
       USE MPI
       USE ESMF
+      use mpi_memory_usage
 !
 !-----------------------------------------------------------------------
 !***  USE the UFSDriver module.  Although it
@@ -465,6 +466,9 @@
       CALL ESMF_GridCompDestroy(gridcomp=UFSDriverComp                  &
                                ,rc      =RC)
       ESMF_ERR_ABORT(RC)
+
+      ! Print memory summary before finalize
+      call print_mpi_memory_usage()
 
 !-----------------------------------------------------------------------
 !***  Shut down the ESMF system.

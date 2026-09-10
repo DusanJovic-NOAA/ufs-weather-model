@@ -325,7 +325,7 @@ endif()
 ###############################################################################
 ### UFS Library
 ###############################################################################
-add_library(ufs driver/UFSDriver.F90)
+add_library(ufs driver/UFSDriver.F90 driver/mpi_memory_usage.F90 driver/mpi_memory_usage.c)
 if(UFS_TRACING)
   add_dependencies(ufs ufs_tracing)
 endif()
