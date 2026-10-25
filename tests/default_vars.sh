@@ -1918,7 +1918,7 @@ export_fire_behavior() {
 export_cmeps() {
   UFS_CONFIGURE=ufs.configure.s2sw_fast.IN
   med_model=cmeps
-  atm_model=${atm_model}
+  atm_model=${atm_model:-fv3}
   ocn_model=mom6
   ice_model=cice6
   wav_model=ww3
