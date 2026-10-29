@@ -8,6 +8,8 @@ if (CMAKE_Fortran_COMPILER_ID MATCHES "GNU" AND CMAKE_Fortran_COMPILER_VERSION V
   message(FATAL_ERROR "GNU Compiler >= 9 is required")
 endif()
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 set(CMAKE_Platform $ENV{CMAKE_Platform})
 
 list(APPEND CMAKE_MODULE_PATH $ENV{ESMF_ROOT}/cmake)
@@ -136,6 +138,7 @@ message("JEDI_DRIVER ...... ${JEDI_DRIVER}")
 message("CMEPS_AOFLUX ..... ${CMEPS_AOFLUX}")
 message("CDEPS_INLINE ..... ${CDEPS_INLINE}")
 message("HYDRO  ........... ${HYDRO}")
+message("UFS_TRACING ...... ${UFS_TRACING}")
 
 message("")
 
@@ -197,6 +200,10 @@ endif()
 find_package(Python 3.6 REQUIRED COMPONENTS Interpreter)
 message("Found Python: ${Python_EXECUTABLE}")
 
+if(UFS_TRACING)
+  add_subdirectory(ufs_tracing)
+  add_compile_definitions(UFS_TRACING)
+endif()
 ###############################################################################
 ### stochastic_physics
 ###############################################################################
@@ -408,6 +415,10 @@ target_link_libraries(ufs PUBLIC "${_ufs_libs_public}")
 ###############################################################################
 add_executable(ufs_model driver/UFS.F90)
 add_dependencies(ufs_model ufs)
+if(UFS_TRACING)
+  add_dependencies(ufs_model ufs_tracing)
+  target_link_libraries(ufs_model ufs_tracing)
+endif()
 target_link_libraries(ufs_model ufs ESMF::ESMF w3emc::w3emc_d)
 set_target_properties(ufs_model PROPERTIES LINKER_LANGUAGE Fortran)
 

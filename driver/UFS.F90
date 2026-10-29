@@ -36,6 +36,10 @@
 
       USE MPI
       USE ESMF
+
+#ifdef UFS_TRACING
+      use ufs_trace_mod
+#endif
 !
 !-----------------------------------------------------------------------
 !***  USE the UFSDriver module.  Although it
@@ -86,12 +90,20 @@
       INTEGER :: resultlen
 !
       INTEGER :: RC, RC_USER                                               !<-- The running error signal
+#ifdef UFS_TRACING
+      integer(kind=8) :: ufs_start_time, ts0, ts
+#endif
 !
 !
 !-----------------------------------------------------------------------
 !***********************************************************************
 !-----------------------------------------------------------------------
-!
+
+#ifdef UFS_TRACING
+      ufs_start_time = get_time_ns() / 1000 ! micro seconds
+      ts0 = ufs_start_time
+#endif
+
 !-----------------------------------------------------------------------
 !***  Initialize the ESMF framework.
 !-----------------------------------------------------------------------
@@ -101,6 +113,10 @@
                           ,VM             =VM                           & !<-- The ESMF Virtual Machine
                           ,rc             =RC)
       ESMF_ERR_ABORT(RC)
+#ifdef UFS_TRACING
+      ts = get_time_ns() / 1000 ! micro seconds
+#endif
+
 
 #if 0
 !***  Useful when debugging ESMF-managed threading and resource control
@@ -121,6 +137,14 @@
                      ,localpet=MYPE                                     &  !<-- The local MPI task ID
                      ,rc      =RC)
       ESMF_ERR_ABORT(RC)
+
+#ifdef UFS_TRACING
+      if (mype == 0) then
+         call ufs_trace_init()
+         call ufs_trace("UFS", "ESMF_Initialize", "B", ts=ts0)
+         call ufs_trace("UFS", "ESMF_Initialize", "E", ts=ts)
+      end if
+#endif
 ! ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 !
 !-----------------------------------------------------------------------
@@ -389,12 +413,18 @@
 !     CALL ESMF_LogWrite(MESSAGE_CHECK,ESMF_LOGMSG_INFO,rc=RC)
 ! ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 !
+#ifdef UFS_TRACING
+      ts = get_time_ns() / 1000 ! micro seconds
+#endif
       CALL ESMF_GridCompInitialize(gridcomp   =UFSDriverComp            &
                                   ,clock      =CLOCK_MAIN               &
                                   ,userRc     =RC_USER                  &
                                   ,rc         =RC)
       ESMF_ERR_ABORT(RC)
       ESMF_ERR_ABORT(RC_USER)
+#ifdef UFS_TRACING
+      if (mype==0) call ufs_trace("UFS", "ESMF_GridCompInitialize", "X", ts=ts)
+#endif
 ! ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 !
 !-----------------------------------------------------------------------
@@ -406,12 +436,18 @@
 !     CALL ESMF_LogWrite(MESSAGE_CHECK,ESMF_LOGMSG_INFO,rc=RC)
 ! ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 !
+#ifdef UFS_TRACING
+      ts = get_time_ns() / 1000 ! micro seconds
+#endif
       CALL ESMF_GridCompRun(gridcomp   =UFSDriverComp                   &
                            ,clock      =CLOCK_MAIN                      &
                            ,userRc     =RC_USER                         &
                            ,rc         =RC)
       ESMF_ERR_ABORT(RC)
       ESMF_ERR_ABORT(RC_USER)
+#ifdef UFS_TRACING
+      if (mype==0) call ufs_trace("UFS", "ESMF_GridCompRun", "X", ts=ts)
+#endif
 ! ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 !
 !-----------------------------------------------------------------------
@@ -423,12 +459,18 @@
 !     CALL ESMF_LogWrite(MESSAGE_CHECK,ESMF_LOGMSG_INFO,rc=RC)
 ! ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 !
+#ifdef UFS_TRACING
+      ts = get_time_ns() / 1000 ! micro seconds
+#endif
       CALL ESMF_GridCompFinalize(gridcomp   =UFSDriverComp              &
                                 ,clock      =CLOCK_MAIN                 &
                                 ,userRc     =RC_USER                    &
                                 ,rc         =RC)
       ESMF_ERR_ABORT(RC)
       ESMF_ERR_ABORT(RC_USER)
+#ifdef UFS_TRACING
+      if (mype==0) call ufs_trace("UFS", "ESMF_GridCompFinalize", "X", ts=ts)
+#endif
 ! ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 !
 !-----------------------------------------------------------------------
@@ -462,19 +504,35 @@
 !      CALL ESMF_LogWrite(MESSAGE_CHECK, ESMF_LOGMSG_INFO, rc = RC)
 ! ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 !
+#ifdef UFS_TRACING
+      ts = get_time_ns() / 1000 ! micro seconds
+#endif
       CALL ESMF_GridCompDestroy(gridcomp=UFSDriverComp                  &
                                ,rc      =RC)
       ESMF_ERR_ABORT(RC)
+#ifdef UFS_TRACING
+      if (mype==0) call ufs_trace("UFS", "ESMF_GridCompDestroy", "X", ts=ts)
+#endif
 
 !-----------------------------------------------------------------------
 !***  Shut down the ESMF system.
 !-----------------------------------------------------------------------
 !
+#ifdef UFS_TRACING
+      ts = get_time_ns() / 1000 ! micro seconds
+#endif
       CALL ESMF_Finalize()
+#ifdef UFS_TRACING
+      if (mype==0) call ufs_trace("UFS", "ESMF_Finalize", "X", ts=ts)
+#endif
 !
 !-----------------------------------------------------------------------
 !
       if (mype==0) call w3tage('ufs      ')
+
+#ifdef UFS_TRACING
+      if (mype==0) call ufs_trace("UFS", "UFS Main", "X", ts=ufs_start_time)
+#endif
 !
 !-----------------------------------------------------------------------
 !
